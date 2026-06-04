@@ -48,7 +48,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ─── LOGIN PAGE ──────────────────────────────────────────── */
+    /* LOGIN PAGE */
     .login-wrap {
       min-height: 100vh;
       display: flex;
@@ -99,7 +99,6 @@
       font-size: 2.8rem;
       display: block;
       margin-bottom: 0.5rem;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
     }
     .login-logo h1 {
       font-size: 1.7rem;
@@ -122,9 +121,7 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
-    .field-group input,
-    .field-group select,
-    .field-group textarea {
+    .field-group input {
       width: 100%;
       padding: 0.8rem 1rem;
       font-size: 0.95rem;
@@ -132,12 +129,8 @@
       border-radius: var(--radius-lg);
       background: var(--white);
       font-family: inherit;
-      color: var(--slate-900);
-      transition: border-color var(--transition), box-shadow var(--transition);
     }
-    .field-group input:focus,
-    .field-group select:focus,
-    .field-group textarea:focus {
+    .field-group input:focus {
       outline: none;
       border-color: var(--green-600);
       box-shadow: 0 0 0 3px rgba(30,107,74,0.12);
@@ -153,23 +146,19 @@
       color: white;
       margin-top: 0.5rem;
       cursor: pointer;
-      transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+      transition: transform var(--transition), box-shadow var(--transition);
       box-shadow: 0 4px 14px rgba(15,59,44,0.35);
-      letter-spacing: 0.01em;
     }
     .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(15,59,44,0.4); }
     .btn-primary:active { transform: scale(0.98); }
-    .btn-primary:disabled { opacity: 0.55; transform: none; cursor: not-allowed; box-shadow: none; }
+    .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
     .msg-error { color: var(--danger); font-size: 0.83rem; margin-top: 0.6rem; text-align: center; }
     .msg-success { color: var(--success); font-size: 0.83rem; margin-top: 0.6rem; font-weight: 500; }
 
-    /* ─── LAYOUT ─────────────────────────────────────────────── */
-    .app-layout {
-      display: flex;
-      min-height: 100vh;
-    }
+    /* APP LAYOUT */
+    .app-layout { display: flex; min-height: 100vh; }
 
-    /* ─── SIDEBAR ────────────────────────────────────────────── */
+    /* SIDEBAR */
     .sidebar {
       width: var(--sidebar-w);
       background: var(--green-900);
@@ -182,7 +171,6 @@
       overflow: hidden;
     }
     .sidebar.collapsed { width: var(--sidebar-collapsed); }
-
     .sidebar-header {
       display: flex;
       align-items: center;
@@ -191,31 +179,16 @@
       border-bottom: 1px solid rgba(255,255,255,0.08);
       min-height: var(--topbar-h);
     }
-    .sidebar-logo {
-      font-size: 1.5rem;
-      flex-shrink: 0;
-      width: 36px;
-      text-align: center;
-    }
+    .sidebar-logo { font-size: 1.5rem; flex-shrink: 0; width: 36px; text-align: center; }
     .sidebar-title {
       font-size: 1rem;
       font-weight: 700;
       color: white;
       white-space: nowrap;
-      letter-spacing: -0.02em;
-      opacity: 1;
       transition: opacity var(--transition);
     }
-    .sidebar-title span {
-      display: block;
-      font-size: 0.7rem;
-      font-weight: 400;
-      color: rgba(255,255,255,0.45);
-      margin-top: 1px;
-      letter-spacing: 0;
-    }
+    .sidebar-title span { display: block; font-size: 0.7rem; font-weight: 400; color: rgba(255,255,255,0.45); }
     .sidebar.collapsed .sidebar-title { opacity: 0; pointer-events: none; }
-
     .sidebar-toggle {
       margin-left: auto;
       background: rgba(255,255,255,0.08);
@@ -225,15 +198,8 @@
       width: 28px; height: 28px;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer;
-      transition: background var(--transition), color var(--transition);
-      flex-shrink: 0;
     }
-    .sidebar-toggle:hover { background: rgba(255,255,255,0.15); color: white; }
-    .sidebar.collapsed .sidebar-toggle { margin-left: 0; width: 36px; height: 28px; }
-
-    .nav-section {
-      padding: 0.75rem 0.75rem 0.25rem;
-    }
+    .nav-section { padding: 0.75rem 0.75rem 0.25rem; }
     .nav-section-label {
       font-size: 0.65rem;
       font-weight: 600;
@@ -243,11 +209,9 @@
       padding: 0 0.4rem;
       margin-bottom: 0.4rem;
       white-space: nowrap;
-      overflow: hidden;
       transition: opacity var(--transition);
     }
     .sidebar.collapsed .nav-section-label { opacity: 0; }
-
     .nav-item {
       display: flex;
       align-items: center;
@@ -255,25 +219,15 @@
       padding: 0.6rem 0.75rem;
       border-radius: var(--radius-md);
       cursor: pointer;
-      transition: background var(--transition), color var(--transition);
       color: rgba(255,255,255,0.55);
       font-size: 0.88rem;
       font-weight: 500;
       white-space: nowrap;
-      overflow: hidden;
       margin-bottom: 2px;
       position: relative;
     }
-    .nav-item .nav-icon {
-      font-size: 1.05rem;
-      flex-shrink: 0;
-      width: 22px;
-      text-align: center;
-    }
-    .nav-item .nav-label {
-      opacity: 1;
-      transition: opacity var(--transition);
-    }
+    .nav-item .nav-icon { font-size: 1.05rem; flex-shrink: 0; width: 22px; text-align: center; }
+    .nav-item .nav-label { opacity: 1; transition: opacity var(--transition); }
     .sidebar.collapsed .nav-item .nav-label { opacity: 0; }
     .nav-item:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.85); }
     .nav-item.active {
@@ -288,7 +242,6 @@
       background: var(--green-400);
       border-radius: 0 3px 3px 0;
     }
-
     .sidebar-footer {
       margin-top: auto;
       padding: 0.75rem;
@@ -312,25 +265,10 @@
       color: white;
       flex-shrink: 0;
     }
-    .user-info {
-      overflow: hidden;
-      opacity: 1;
-      transition: opacity var(--transition);
-    }
+    .user-info { overflow: hidden; opacity: 1; transition: opacity var(--transition); }
     .sidebar.collapsed .user-info { opacity: 0; }
-    .user-name {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.85);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .user-role {
-      font-size: 0.7rem;
-      color: rgba(255,255,255,0.38);
-      white-space: nowrap;
-    }
+    .user-name { font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.85); white-space: nowrap; }
+    .user-role { font-size: 0.7rem; color: rgba(255,255,255,0.38); white-space: nowrap; }
     .logout-btn {
       margin-top: 0.4rem;
       display: flex;
@@ -345,16 +283,12 @@
       font-weight: 500;
       cursor: pointer;
       width: 100%;
-      transition: background var(--transition), color var(--transition);
       white-space: nowrap;
       overflow: hidden;
     }
     .logout-btn:hover { background: rgba(239,68,68,0.2); color: #FCA5A5; }
-    .logout-btn .nav-icon { flex-shrink:0; }
-    .logout-btn .nav-label { opacity:1; transition: opacity var(--transition); }
-    .sidebar.collapsed .logout-btn .nav-label { opacity:0; }
 
-    /* ─── MAIN CONTENT ───────────────────────────────────────── */
+    /* MAIN CONTENT */
     .main {
       margin-left: var(--sidebar-w);
       flex: 1;
@@ -364,7 +298,6 @@
       transition: margin-left var(--transition);
     }
     .main.sidebar-collapsed { margin-left: var(--sidebar-collapsed); }
-
     .topbar {
       height: var(--topbar-h);
       background: var(--white);
@@ -378,13 +311,7 @@
       z-index: 50;
       box-shadow: var(--shadow-sm);
     }
-    .topbar-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--slate-900);
-      letter-spacing: -0.02em;
-      flex: 1;
-    }
+    .topbar-title { font-size: 1.15rem; font-weight: 700; color: var(--slate-900); flex: 1; }
     .topbar-badge {
       background: var(--green-50);
       color: var(--green-700);
@@ -392,39 +319,15 @@
       border-radius: 40px;
       font-size: 0.75rem;
       font-weight: 600;
-      border: 1px solid rgba(30,107,74,0.2);
     }
+    .content-area { padding: 1.75rem; flex: 1; }
 
-    .content-area {
-      padding: 1.75rem;
-      flex: 1;
-    }
-
-    /* ─── PAGE SECTIONS ──────────────────────────────────────── */
-    .page {
-      animation: fadeIn 0.28s cubic-bezier(0.4,0,0.2,1) both;
-    }
-    @keyframes fadeIn {
-      from { opacity:0; transform: translateY(10px); }
-      to   { opacity:1; transform: translateY(0); }
-    }
-
-    .page-header {
-      margin-bottom: 1.5rem;
-    }
-    .page-header h2 {
-      font-size: 1.45rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      color: var(--slate-900);
-    }
-    .page-header p {
-      font-size: 0.88rem;
-      color: var(--slate-500);
-      margin-top: 0.2rem;
-    }
-
-    /* ─── CARDS ──────────────────────────────────────────────── */
+    /* PAGE & CARDS */
+    .page { animation: fadeIn 0.28s cubic-bezier(0.4,0,0.2,1) both; }
+    @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
+    .page-header { margin-bottom: 1.5rem; }
+    .page-header h2 { font-size: 1.45rem; font-weight: 700; letter-spacing: -0.03em; color: var(--slate-900); }
+    .page-header p { font-size: 0.88rem; color: var(--slate-500); margin-top: 0.2rem; }
     .card {
       background: var(--white);
       border-radius: var(--radius-xl);
@@ -434,42 +337,13 @@
       transition: box-shadow var(--transition);
     }
     .card:hover { box-shadow: var(--shadow-md); }
-    .card-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--slate-900);
-      letter-spacing: -0.02em;
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .card-title .icon {
-      font-size: 1.1rem;
-    }
+    .card-title { font-size: 1rem; font-weight: 700; color: var(--slate-900); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+    @media (min-width: 680px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
-    }
-    @media (min-width: 680px) {
-      .grid-2 { grid-template-columns: 1fr 1fr; }
-    }
-
-    /* ─── FORM ELEMENTS ──────────────────────────────────────── */
-    label {
-      display: block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--slate-500);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.35rem;
-      margin-top: 0.9rem;
-    }
+    /* FORMS */
+    label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem; margin-top: 0.9rem; }
     label:first-child { margin-top: 0; }
-
     input, select, textarea {
       width: 100%;
       padding: 0.75rem 1rem;
@@ -478,8 +352,6 @@
       border-radius: var(--radius-md);
       background: var(--slate-50);
       font-family: inherit;
-      color: var(--slate-900);
-      transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
     }
     input:focus, select:focus, textarea:focus {
       outline: none;
@@ -488,7 +360,6 @@
       box-shadow: 0 0 0 3px rgba(30,107,74,0.1);
     }
     textarea { resize: vertical; min-height: 72px; }
-
     .btn {
       display: inline-flex;
       align-items: center;
@@ -500,8 +371,7 @@
       border: none;
       border-radius: 40px;
       cursor: pointer;
-      transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition), background var(--transition);
-      letter-spacing: 0.01em;
+      transition: transform var(--transition), box-shadow var(--transition);
       width: 100%;
       margin-top: 1rem;
     }
@@ -511,15 +381,12 @@
       box-shadow: 0 3px 10px rgba(15,59,44,0.28);
     }
     .btn-solid:hover { transform: translateY(-1px); box-shadow: 0 5px 16px rgba(15,59,44,0.35); }
-    .btn-solid:active { transform: scale(0.98); }
-    .btn-solid:disabled { opacity: 0.5; transform: none; box-shadow: none; cursor: not-allowed; }
     .btn-outline {
       background: transparent;
       color: var(--green-700);
       border: 1.5px solid rgba(30,107,74,0.4);
     }
     .btn-outline:hover { background: var(--green-50); }
-
     .toast {
       display: inline-flex;
       align-items: center;
@@ -531,17 +398,10 @@
       margin-top: 0.75rem;
       animation: toastIn 0.2s ease both;
     }
-    @keyframes toastIn {
-      from { opacity:0; transform: scale(0.94); }
-      to   { opacity:1; transform: scale(1); }
-    }
+    @keyframes toastIn { from { opacity:0; transform: scale(0.94); } to { opacity:1; transform: scale(1); } }
     .toast-success { background: rgba(16,185,129,0.1); color: #059669; border: 1px solid rgba(16,185,129,0.25); }
     .toast-error   { background: rgba(239,68,68,0.08); color: var(--danger); border: 1px solid rgba(239,68,68,0.2); }
-
-    /* ─── DIVIDER ────────────────────────────────────────────── */
     .divider { border: none; border-top: 1px solid var(--slate-300); margin: 1.25rem 0; }
-
-    /* ─── PROPERTY BADGES ────────────────────────────────────── */
     .property-badge {
       display: inline-flex;
       align-items: center;
@@ -552,32 +412,12 @@
       border-radius: 40px;
       font-size: 0.75rem;
       font-weight: 600;
-      border: 1px solid rgba(30,107,74,0.2);
       margin: 0.2rem 0.3rem 0.2rem 0;
     }
-
-    /* ─── TABLE ──────────────────────────────────────────────── */
     .table-wrap { overflow-x: auto; margin-top: 0.75rem; }
     table { width: 100%; font-size: 0.8rem; border-collapse: collapse; }
-    th {
-      text-align: left;
-      padding: 0.55rem 0.75rem;
-      background: var(--slate-100);
-      color: var(--slate-500);
-      font-weight: 600;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      border-bottom: 1px solid var(--slate-300);
-    }
-    th:first-child { border-radius: var(--radius-md) 0 0 0; }
-    th:last-child  { border-radius: 0 var(--radius-md) 0 0; }
-    td {
-      padding: 0.65rem 0.75rem;
-      border-bottom: 1px solid rgba(203,213,225,0.5);
-      color: var(--slate-700);
-    }
-    tr:last-child td { border-bottom: none; }
+    th { text-align: left; padding: 0.55rem 0.75rem; background: var(--slate-100); color: var(--slate-500); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; border-bottom: 1px solid var(--slate-300); }
+    td { padding: 0.65rem 0.75rem; border-bottom: 1px solid rgba(203,213,225,0.5); color: var(--slate-700); }
     tr:hover td { background: var(--slate-50); }
     .status-pill {
       display: inline-block;
@@ -591,62 +431,26 @@
     .status-Negotiation{ background: #FEF9C3; color: #A16207; }
     .status-Won        { background: #F0FDF4; color: #16A34A; }
     .status-Lost       { background: #FEF2F2; color: #DC2626; }
+    .info-row { display: flex; align-items: center; gap: 0.6rem; font-size: 0.88rem; padding: 0.5rem 0; }
+    .empty { text-align: center; padding: 2rem 1rem; color: var(--slate-500); }
+    .empty-icon { font-size: 2rem; margin-bottom: 0.5rem; }
 
-    /* ─── INFO CARD ──────────────────────────────────────────── */
-    .info-row {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.88rem;
-      color: var(--slate-700);
-      padding: 0.5rem 0;
-    }
-    .info-row strong { color: var(--slate-900); font-weight: 600; }
-
-    /* ─── EMPTY STATE ────────────────────────────────────────── */
-    .empty {
-      text-align: center;
-      padding: 2rem 1rem;
-      color: var(--slate-500);
-      font-size: 0.85rem;
-    }
-    .empty .empty-icon { font-size: 2rem; margin-bottom: 0.5rem; }
-
-    /* ─── MOBILE SIDEBAR OVERLAY ─────────────────────────────── */
+    /* MOBILE */
     @media (max-width: 640px) {
-      .sidebar {
-        transform: translateX(-100%);
-        transition: transform var(--transition), width var(--transition);
-      }
+      .sidebar { transform: translateX(-100%); transition: transform var(--transition); }
       .sidebar.mobile-open { transform: translateX(0); }
       .main { margin-left: 0 !important; }
-      .overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.4);
-        z-index: 90;
-      }
+      .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 90; }
       .overlay.active { display: block; }
-      .mobile-toggle {
-        display: flex !important;
-      }
+      .mobile-toggle { display: flex !important; }
     }
-    .mobile-toggle {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--slate-700);
-      font-size: 1.25rem;
-      padding: 0.25rem;
-    }
+    .mobile-toggle { display: none; background: none; border: none; cursor: pointer; font-size: 1.25rem; }
   </style>
 </head>
 <body>
 <div id="app">
 
-  <!-- ══ LOGIN ════════════════════════════════════════════════ -->
+  <!-- LOGIN -->
   <div v-if="!loggedIn" class="login-wrap">
     <div class="login-card">
       <div class="login-logo">
@@ -655,76 +459,57 @@
         <p>Sleepy Stays Operations</p>
       </div>
       <div class="field-group">
-        <label>Email address</label>
-        <input type="email" v-model="loginEmail" placeholder="you@sleepystays.com" @keyup.enter="login" autocomplete="email">
+        <label>Email</label>
+        <input type="email" v-model="loginEmail" placeholder="you@sleepystays.com" @keyup.enter="login">
       </div>
       <div class="field-group">
         <label>Password</label>
-        <input type="password" v-model="loginPassword" placeholder="••••••••" @keyup.enter="login" autocomplete="current-password">
+        <input type="password" v-model="loginPassword" placeholder="••••••••" @keyup.enter="login">
       </div>
-      <button class="btn-primary" @click="login" :disabled="loading">
-        {{ loading ? 'Signing in…' : 'Sign in →' }}
-      </button>
+      <button class="btn-primary" @click="login" :disabled="loading">{{ loading ? 'Signing in…' : 'Sign in →' }}</button>
       <div class="msg-error" v-if="loginError">{{ loginError }}</div>
     </div>
   </div>
 
-  <!-- ══ APP LAYOUT ═══════════════════════════════════════════ -->
+  <!-- DASHBOARD -->
   <div v-else class="app-layout">
-
-    <!-- Mobile overlay -->
     <div class="overlay" :class="{ active: mobileOpen }" @click="mobileOpen = false"></div>
 
-    <!-- ── SIDEBAR ── -->
     <aside class="sidebar" :class="{ collapsed: sidebarCollapsed, 'mobile-open': mobileOpen }">
       <div class="sidebar-header">
         <span class="sidebar-logo">🏡</span>
-        <div class="sidebar-title">
-          Staff Hub
-          <span>Sleepy Stays</span>
-        </div>
-        <button class="sidebar-toggle" @click="sidebarCollapsed = !sidebarCollapsed" title="Toggle sidebar">
-          <span v-if="sidebarCollapsed">›</span>
-          <span v-else>‹</span>
+        <div class="sidebar-title">Staff Hub<span>Sleepy Stays</span></div>
+        <button class="sidebar-toggle" @click="sidebarCollapsed = !sidebarCollapsed">
+          <span v-if="sidebarCollapsed">›</span><span v-else>‹</span>
         </button>
       </div>
-
       <div class="nav-section">
         <div class="nav-section-label">Operations</div>
         <div class="nav-item" :class="{ active: activePage === 'attendance' }" @click="go('attendance')">
-          <span class="nav-icon">📍</span>
-          <span class="nav-label">Attendance</span>
+          <span class="nav-icon">📍</span><span class="nav-label">Attendance</span>
         </div>
         <div class="nav-item" :class="{ active: activePage === 'eod' }" @click="go('eod')">
-          <span class="nav-icon">📝</span>
-          <span class="nav-label">End of Day</span>
+          <span class="nav-icon">📝</span><span class="nav-label">End of Day</span>
         </div>
         <div class="nav-item" :class="{ active: activePage === 'guests' }" @click="go('guests')">
-          <span class="nav-icon">🧑‍🤝‍🧑</span>
-          <span class="nav-label">Guest Management</span>
+          <span class="nav-icon">🧑‍🤝‍🧑</span><span class="nav-label">Guest Management</span>
         </div>
       </div>
-
       <div class="nav-section">
         <div class="nav-section-label">Staff</div>
         <div class="nav-item" :class="{ active: activePage === 'helpers' }" @click="go('helpers')">
-          <span class="nav-icon">🧑‍🌾</span>
-          <span class="nav-label">Helpers Log</span>
+          <span class="nav-icon">🧑‍🌾</span><span class="nav-label">Helpers Log</span>
         </div>
         <div class="nav-item" :class="{ active: activePage === 'leads' }" @click="go('leads')">
-          <span class="nav-icon">📞</span>
-          <span class="nav-label">Sales Leads</span>
+          <span class="nav-icon">📞</span><span class="nav-label">Sales Leads</span>
         </div>
       </div>
-
       <div class="nav-section">
         <div class="nav-section-label">Account</div>
         <div class="nav-item" :class="{ active: activePage === 'profile' }" @click="go('profile')">
-          <span class="nav-icon">👤</span>
-          <span class="nav-label">Profile</span>
+          <span class="nav-icon">👤</span><span class="nav-label">Profile</span>
         </div>
       </div>
-
       <div class="sidebar-footer">
         <div class="user-pill">
           <div class="user-avatar">{{ user.name ? user.name[0].toUpperCase() : '?' }}</div>
@@ -733,14 +518,10 @@
             <div class="user-role">{{ user.team }} · {{ user.role }}</div>
           </div>
         </div>
-        <button class="logout-btn" @click="logout">
-          <span class="nav-icon">🚪</span>
-          <span class="nav-label">Sign out</span>
-        </button>
+        <button class="logout-btn" @click="logout"><span class="nav-icon">🚪</span><span class="nav-label">Sign out</span></button>
       </div>
     </aside>
 
-    <!-- ── MAIN ── -->
     <div class="main" :class="{ 'sidebar-collapsed': sidebarCollapsed }">
       <header class="topbar">
         <button class="mobile-toggle" @click="mobileOpen = !mobileOpen">☰</button>
@@ -750,274 +531,133 @@
 
       <div class="content-area">
 
-        <!-- ── ATTENDANCE ── -->
+        <!-- ATTENDANCE -->
         <div v-if="activePage === 'attendance'" class="page">
-          <div class="page-header">
-            <h2>📍 Attendance</h2>
-            <p>Record your daily check‑in and check‑out</p>
-          </div>
+          <div class="page-header"><h2>📍 Attendance</h2><p>Record your daily check‑in and check‑out</p></div>
           <div class="card" style="max-width: 520px;">
             <div class="card-title"><span class="icon">📍</span> Record Attendance</div>
             <label>Property</label>
-            <select v-model="selectedProperty">
-              <option v-for="p in user.assignedProperties" :value="p">{{ p }}</option>
-            </select>
+            <select v-model="selectedProperty"><option v-for="p in user.assignedProperties" :value="p">{{ p }}</option></select>
             <label>Action</label>
-            <select v-model="attendanceAction">
-              <option value="CheckIn">🟢 Check In</option>
-              <option value="CheckOut">🔴 Check Out</option>
-            </select>
-            <label>Date & time</label>
-            <input type="datetime-local" v-model="attendanceDateTime">
-            <label>Notes (optional)</label>
-            <textarea v-model="attendanceNotes" rows="2" placeholder="Any notes…"></textarea>
-            <button class="btn btn-solid" @click="submitAttendance" :disabled="loadingAttendance">
-              {{ loadingAttendance ? 'Recording…' : 'Record attendance' }}
-            </button>
+            <select v-model="attendanceAction"><option value="CheckIn">🟢 Check In</option><option value="CheckOut">🔴 Check Out</option></select>
+            <label>Date & time</label><input type="datetime-local" v-model="attendanceDateTime">
+            <label>Notes</label><textarea v-model="attendanceNotes" rows="2" placeholder="Any notes…"></textarea>
+            <button class="btn btn-solid" @click="submitAttendance" :disabled="loadingAttendance">{{ loadingAttendance ? 'Recording…' : 'Record attendance' }}</button>
             <div v-if="attMsg" :class="attMsg.includes('✅') ? 'toast toast-success' : 'toast toast-error'">{{ attMsg }}</div>
+            <!-- WhatsApp button always visible -->
+            <button class="btn btn-outline" @click="shareAttendanceWhatsApp" style="margin-top:0.5rem">📱 Share on WhatsApp</button>
           </div>
         </div>
 
-        <!-- ── EOD ── -->
+        <!-- EOD -->
         <div v-if="activePage === 'eod'" class="page">
-          <div class="page-header">
-            <h2>📝 End of Day Report</h2>
-            <p>Submit your daily property report</p>
-          </div>
+          <div class="page-header"><h2>📝 End of Day Report</h2><p>Submit your daily property report</p></div>
           <div class="card" style="max-width: 620px;">
             <div class="card-title"><span class="icon">📝</span> Daily Report</div>
             <div class="grid-2">
               <div>
-                <label>Property</label>
-                <select v-model="eodProperty">
-                  <option v-for="p in user.assignedProperties" :value="p">{{ p }}</option>
-                </select>
-                <label>Report date</label>
-                <input type="date" v-model="eodDate">
-                <label>Sales amount (₹)</label>
-                <input type="number" v-model="eodSales" placeholder="0">
-                <label>Occupancy (%)</label>
-                <input type="text" v-model="eodOccupancy" placeholder="e.g. 85%">
+                <label>Property</label><select v-model="eodProperty"><option v-for="p in user.assignedProperties" :value="p">{{ p }}</option></select>
+                <label>Report date</label><input type="date" v-model="eodDate">
+                <label>Sales amount (₹)</label><input type="number" v-model="eodSales" placeholder="0">
+                <label>Occupancy (%)</label><input type="text" v-model="eodOccupancy" placeholder="e.g. 85%">
               </div>
               <div>
-                <label>🛠️ Maintenance completed</label>
-                <textarea v-model="eodMaintenance" rows="3" placeholder="Fixed AC in room 3…"></textarea>
-                <label>Additional notes</label>
-                <textarea v-model="eodNotes" rows="3" placeholder="Anything else…"></textarea>
+                <label>🛠️ Maintenance</label><textarea v-model="eodMaintenance" rows="3" placeholder="Fixed AC in room 3…"></textarea>
+                <label>Additional notes</label><textarea v-model="eodNotes" rows="3" placeholder="Anything else…"></textarea>
               </div>
             </div>
-            <button class="btn btn-solid" @click="submitEOD" :disabled="loadingEOD">
-              {{ loadingEOD ? 'Submitting…' : 'Submit EOD report' }}
-            </button>
+            <button class="btn btn-solid" @click="submitEOD" :disabled="loadingEOD">{{ loadingEOD ? 'Submitting…' : 'Submit EOD report' }}</button>
             <div v-if="eodMsg" :class="eodMsg.includes('✅') ? 'toast toast-success' : 'toast toast-error'">{{ eodMsg }}</div>
+            <button class="btn btn-outline" @click="shareEODWhatsApp" style="margin-top:0.5rem">📱 Share on WhatsApp</button>
           </div>
         </div>
 
-        <!-- ── GUESTS ── -->
+        <!-- GUEST MANAGEMENT -->
         <div v-if="activePage === 'guests'" class="page">
-          <div class="page-header">
-            <h2>🧑‍🤝‍🧑 Guest Management</h2>
-            <p>Manage check‑ins and check‑outs</p>
-          </div>
+          <div class="page-header"><h2>🧑‍🤝‍🧑 Guest Management</h2><p>Manage check‑ins and check‑outs</p></div>
           <div class="grid-2">
             <div class="card">
-              <div class="card-title"><span class="icon">➕</span> Check In</div>
-              <label>Guest name</label>
-              <input type="text" v-model="guestCheckIn.name" placeholder="Full name">
-              <label>Property</label>
-              <select v-model="guestCheckIn.property">
-                <option v-for="p in user.assignedProperties" :value="p">{{ p }}</option>
-              </select>
-              <label>Check‑in date & time</label>
-              <input type="datetime-local" v-model="guestCheckIn.datetime">
-              <label>Room / Unit</label>
-              <input type="text" v-model="guestCheckIn.room" placeholder="e.g. 101">
-              <button class="btn btn-solid" @click="doGuestCheckIn" :disabled="loadingGuest">
-                {{ loadingGuest ? 'Processing…' : 'Check in guest' }}
-              </button>
+              <div class="card-title">➕ Check In</div>
+              <label>Guest name</label><input type="text" v-model="guestCheckIn.name" placeholder="Full name">
+              <label>Property</label><select v-model="guestCheckIn.property"><option v-for="p in user.assignedProperties" :value="p">{{ p }}</option></select>
+              <label>Check‑in date & time</label><input type="datetime-local" v-model="guestCheckIn.datetime">
+              <label>Room / Unit</label><input type="text" v-model="guestCheckIn.room" placeholder="e.g. 101">
+              <button class="btn btn-solid" @click="doGuestCheckIn" :disabled="loadingGuest">{{ loadingGuest ? 'Processing…' : 'Check in guest' }}</button>
             </div>
             <div class="card">
-              <div class="card-title"><span class="icon">➖</span> Check Out</div>
-              <label>Guest name</label>
-              <input type="text" v-model="guestCheckOut.name" placeholder="Start typing" list="openGuestsList">
-              <datalist id="openGuestsList">
-                <option v-for="g in openCheckIns" :value="g.GuestName" :key="g.Timestamp"></option>
-              </datalist>
-              <label>Property</label>
-              <select v-model="guestCheckOut.property">
-                <option v-for="p in user.assignedProperties" :value="p">{{ p }}</option>
-              </select>
-              <label>Check‑out date & time</label>
-              <input type="datetime-local" v-model="guestCheckOut.datetime">
-              <label>Amount paid (₹)</label>
-              <input type="number" v-model="guestCheckOut.amount" placeholder="0">
-              <label>Notes</label>
-              <textarea v-model="guestCheckOut.notes" rows="2" placeholder="Payment method…"></textarea>
-              <button class="btn btn-solid" @click="doGuestCheckOut" :disabled="loadingGuest">
-                {{ loadingGuest ? 'Processing…' : 'Check out & record' }}
-              </button>
+              <div class="card-title">➖ Check Out</div>
+              <label>Guest name</label><input type="text" v-model="guestCheckOut.name" placeholder="Start typing" list="openGuestsList">
+              <datalist id="openGuestsList"><option v-for="g in openCheckIns" :value="g.GuestName" :key="g.Timestamp"></option></datalist>
+              <label>Property</label><select v-model="guestCheckOut.property"><option v-for="p in user.assignedProperties" :value="p">{{ p }}</option></select>
+              <label>Check‑out date & time</label><input type="datetime-local" v-model="guestCheckOut.datetime">
+              <label>Amount paid (₹)</label><input type="number" v-model="guestCheckOut.amount" placeholder="0">
+              <label>Notes</label><textarea v-model="guestCheckOut.notes" rows="2" placeholder="Payment method…"></textarea>
+              <button class="btn btn-solid" @click="doGuestCheckOut" :disabled="loadingGuest">{{ loadingGuest ? 'Processing…' : 'Check out & record' }}</button>
             </div>
           </div>
-          <div v-if="guestMsg" style="margin-top:1rem">
-            <div :class="guestMsg.includes('✅') ? 'toast toast-success' : 'toast toast-error'">{{ guestMsg }}</div>
-          </div>
+          <div v-if="guestMsg" style="margin-top:1rem"><div :class="guestMsg.includes('✅') ? 'toast toast-success' : 'toast toast-error'">{{ guestMsg }}</div></div>
         </div>
 
-        <!-- ── HELPERS ── -->
+        <!-- HELPERS -->
         <div v-if="activePage === 'helpers'" class="page">
-          <div class="page-header">
-            <h2>🧑‍🌾 Temporary Helpers</h2>
-            <p>Log and track temporary staff</p>
-          </div>
+          <div class="page-header"><h2>🧑‍🌾 Temporary Helpers</h2><p>Log and track temporary staff</p></div>
           <div class="card" style="max-width: 640px; margin-bottom: 1.25rem;">
-            <div class="card-title"><span class="icon">➕</span> Log a Helper</div>
+            <div class="card-title">➕ Log a Helper</div>
             <div class="grid-2">
-              <div>
-                <label>Helper name</label>
-                <input type="text" v-model="helperName" placeholder="e.g. Raju">
-                <label>Property</label>
-                <select v-model="helperProperty">
-                  <option v-for="p in user.assignedProperties" :value="p">{{ p }}</option>
-                </select>
-              </div>
-              <div>
-                <label>Work date</label>
-                <input type="date" v-model="helperDate">
-                <label>Notes</label>
-                <textarea v-model="helperNotes" rows="2" placeholder="What they helped with"></textarea>
-              </div>
+              <div><label>Helper name</label><input type="text" v-model="helperName" placeholder="e.g. Raju"><label>Property</label><select v-model="helperProperty"><option v-for="p in user.assignedProperties" :value="p">{{ p }}</option></select></div>
+              <div><label>Work date</label><input type="date" v-model="helperDate"><label>Notes</label><textarea v-model="helperNotes" rows="2" placeholder="What they helped with"></textarea></div>
             </div>
-            <button class="btn btn-solid" @click="addHelper" :disabled="loadingHelpers">
-              {{ loadingHelpers ? 'Logging…' : '+ Log helper' }}
-            </button>
+            <button class="btn btn-solid" @click="addHelper" :disabled="loadingHelpers">{{ loadingHelpers ? 'Logging…' : '+ Log helper' }}</button>
             <div v-if="helperMsg" :class="helperMsg.includes('✅') ? 'toast toast-success' : 'toast toast-error'">{{ helperMsg }}</div>
           </div>
           <div class="card" style="max-width: 640px;">
-            <div class="card-title"><span class="icon">📋</span> Recent Helpers</div>
+            <div class="card-title">📋 Recent Helpers</div>
             <div class="table-wrap">
-              <table v-if="recentHelpers.length">
-                <thead><tr><th>Date</th><th>Name</th><th>Property</th><th>Notes</th></tr></thead>
-                <tbody>
-                  <tr v-for="h in recentHelpers.slice(0,8)" :key="h.Timestamp">
-                    <td>{{ h.WorkDate }}</td>
-                    <td>{{ h.HelperName }}</td>
-                    <td>{{ h.Property }}</td>
-                    <td>{{ h.Notes }}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="empty" v-else>
-                <div class="empty-icon">🧑‍🌾</div>
-                No helpers logged yet
-              </div>
+              <table v-if="recentHelpers.length"><thead><tr><th>Date</th><th>Name</th><th>Property</th><th>Notes</th></tr></thead>
+              <tbody><tr v-for="h in recentHelpers.slice(0,8)" :key="h.Timestamp"><td>{{ h.WorkDate }}</td><td>{{ h.HelperName }}</td><td>{{ h.Property }}</td><td>{{ h.Notes }}</td></tr></tbody></table>
+              <div class="empty" v-else><div class="empty-icon">🧑‍🌾</div>No helpers logged yet</div>
             </div>
           </div>
         </div>
 
-        <!-- ── LEADS ── -->
+        <!-- SALES LEADS -->
         <div v-if="activePage === 'leads'" class="page">
-          <div class="page-header">
-            <h2>📞 Sales Leads</h2>
-            <p>{{ user.team === 'Sales' ? 'Track and manage your leads' : 'All staff leads overview' }}</p>
-          </div>
+          <div class="page-header"><h2>📞 Sales Leads</h2><p>{{ user.team === 'Sales' ? 'Track and manage your leads' : 'All staff leads overview' }}</p></div>
           <div class="card" style="max-width: 640px; margin-bottom: 1.25rem;">
-            <div class="card-title"><span class="icon">➕</span> Add Lead</div>
+            <div class="card-title">➕ Add Lead</div>
             <div class="grid-2">
-              <div>
-                <label>Lead name *</label>
-                <input type="text" v-model="lead.name" placeholder="Full name">
-                <label>Property *</label>
-                <select v-model="lead.property">
-                  <option v-for="p in user.assignedProperties" :value="p">{{ p }}</option>
-                </select>
-                <label>Contact (phone/email)</label>
-                <input type="text" v-model="lead.contact" placeholder="Phone or email">
-              </div>
-              <div>
-                <label>Calls made</label>
-                <input type="number" v-model="lead.callsMade" min="0">
-                <label>Status</label>
-                <select v-model="lead.status">
-                  <option>New</option><option>Contacted</option><option>Negotiation</option><option>Won</option><option>Lost</option>
-                </select>
-                <label>Notes</label>
-                <textarea v-model="lead.notes" rows="2" placeholder="Interests, follow‑up…"></textarea>
-              </div>
+              <div><label>Lead name *</label><input type="text" v-model="lead.name" placeholder="Full name"><label>Property *</label><select v-model="lead.property"><option v-for="p in user.assignedProperties" :value="p">{{ p }}</option></select><label>Contact</label><input type="text" v-model="lead.contact" placeholder="Phone or email"></div>
+              <div><label>Calls made</label><input type="number" v-model="lead.callsMade" min="0"><label>Status</label><select v-model="lead.status"><option>New</option><option>Contacted</option><option>Negotiation</option><option>Won</option><option>Lost</option></select><label>Notes</label><textarea v-model="lead.notes" rows="2" placeholder="Interests, follow‑up…"></textarea></div>
             </div>
-            <button class="btn btn-solid" @click="addLead" :disabled="loadingLead">
-              {{ loadingLead ? 'Adding…' : '+ Add lead' }}
-            </button>
+            <button class="btn btn-solid" @click="addLead" :disabled="loadingLead">{{ loadingLead ? 'Adding…' : '+ Add lead' }}</button>
             <div v-if="leadMsg" :class="leadMsg.includes('✅') ? 'toast toast-success' : 'toast toast-error'">{{ leadMsg }}</div>
+            <button class="btn btn-outline" @click="shareLeadWhatsApp" style="margin-top:0.5rem">📱 Share on WhatsApp</button>
           </div>
           <div class="card" style="max-width: 860px;">
-            <div class="card-title">
-              <span class="icon">{{ user.team === 'Sales' ? '📋' : '📊' }}</span>
-              {{ user.team === 'Sales' ? 'My Recent Leads' : 'All Sales Leads' }}
-            </div>
+            <div class="card-title">{{ user.team === 'Sales' ? '📋 My Recent Leads' : '📊 All Sales Leads' }}</div>
             <div class="table-wrap">
-              <table v-if="displayLeads.length">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th v-if="user.team !== 'Sales'">Staff</th>
-                    <th>Lead</th>
-                    <th>Property</th>
-                    <th>Calls</th>
-                    <th>Status</th>
-                    <th>Notes</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="l in displayLeads.slice(0,15)" :key="l.Timestamp">
-                    <td>{{ l.Timestamp ? l.Timestamp.slice(0,10) : '—' }}</td>
-                    <td v-if="user.team !== 'Sales'">{{ l.StaffEmail ? l.StaffEmail.split('@')[0] : '—' }}</td>
-                    <td>{{ l.LeadName }}</td>
-                    <td>{{ l.Property }}</td>
-                    <td>{{ l.CallsMade }}</td>
-                    <td><span :class="'status-pill status-' + l.Status">{{ l.Status }}</span></td>
-                    <td>{{ l.Notes }}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="empty" v-else>
-                <div class="empty-icon">📞</div>
-                No leads found
-              </div>
+              <table v-if="displayLeads.length"><thead><tr><th>Date</th><th v-if="user.team !== 'Sales'">Staff</th><th>Lead</th><th>Property</th><th>Calls</th><th>Status</th><th>Notes</th></tr></thead>
+              <tbody><tr v-for="l in displayLeads.slice(0,15)" :key="l.Timestamp"><td>{{ l.Timestamp ? l.Timestamp.slice(0,10) : '—' }}</td><td v-if="user.team !== 'Sales'">{{ l.StaffEmail ? l.StaffEmail.split('@')[0] : '—' }}</td><td>{{ l.LeadName }}</td><td>{{ l.Property }}</td><td>{{ l.CallsMade }}</td><td><span :class="'status-pill status-' + l.Status">{{ l.Status }}</span></td><td>{{ l.Notes }}</td></tr></tbody></table>
+              <div class="empty" v-else><div class="empty-icon">📞</div>No leads found</div>
             </div>
           </div>
         </div>
 
-        <!-- ── PROFILE ── -->
+        <!-- PROFILE -->
         <div v-if="activePage === 'profile'" class="page">
-          <div class="page-header">
-            <h2>👤 Profile</h2>
-            <p>Your account and assigned properties</p>
-          </div>
+          <div class="page-header"><h2>👤 Profile</h2><p>Your account and assigned properties</p></div>
           <div class="card" style="max-width: 480px;">
             <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem;">
-              <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--green-700),var(--green-400));display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:700;color:white;flex-shrink:0;">
-                {{ user.name ? user.name[0].toUpperCase() : '?' }}
-              </div>
-              <div>
-                <div style="font-size:1.15rem;font-weight:700;color:var(--slate-900)">{{ user.name }}</div>
-                <div style="font-size:0.82rem;color:var(--slate-500)">{{ user.team }} · {{ user.role }}</div>
-              </div>
+              <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--green-700),var(--green-400));display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:700;color:white;">{{ user.name ? user.name[0].toUpperCase() : '?' }}</div>
+              <div><div style="font-size:1.15rem;font-weight:700;">{{ user.name }}</div><div style="font-size:0.82rem;color:var(--slate-500)">{{ user.team }} · {{ user.role }}</div></div>
             </div>
             <hr class="divider">
-            <div class="info-row">
-              <span>📞</span><strong>Phone:</strong> {{ user.phone || '—' }}
-            </div>
-            <div class="info-row">
-              <span>👥</span><strong>Team:</strong> {{ user.team }}
-            </div>
-            <div class="info-row">
-              <span>🏷️</span><strong>Role:</strong> {{ user.role }}
-            </div>
+            <div class="info-row"><span>📞</span><strong>Phone:</strong> {{ user.phone || '—' }}</div>
+            <div class="info-row"><span>👥</span><strong>Team:</strong> {{ user.team }}</div>
+            <div class="info-row"><span>🏷️</span><strong>Role:</strong> {{ user.role }}</div>
             <hr class="divider">
-            <div style="font-size:0.78rem;font-weight:600;color:var(--slate-500);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.6rem;">Assigned Properties</div>
-            <div>
-              <span v-for="prop in user.assignedProperties" :key="prop" class="property-badge">🏠 {{ prop }}</span>
-            </div>
+            <div style="font-size:0.78rem;font-weight:600;text-transform:uppercase;margin-bottom:0.6rem;">Assigned Properties</div>
+            <div><span v-for="prop in user.assignedProperties" :key="prop" class="property-badge">🏠 {{ prop }}</span></div>
           </div>
         </div>
 
@@ -1028,13 +668,13 @@
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.min.js"></script>
 <script>
-const API_BASE = 'https://script.google.com/macros/s/AKfycbwEF6-m-Uk8_k1dozlsYFuhrWVjAn2ulZZt4XZN4twNCHx2KnViFK12nEsSAD9hQElV/exec';
+const API_BASE = 'https://script.google.com/macros/s/AKfycbw7DJga9f3mkDlClRUOIXI4PkqFeIujcaolOmSF3qVd7YQ-YxMAtPu0TdedaJJhkB_g/exec';  // <-- REPLACE WITH YOUR WEB APP URL
 
 new Vue({
   el: '#app',
   data: {
     loggedIn: false,
-    user: { name: '', team: '', role: '', assignedProperties: [], phone: '' },
+    user: { name: '', team: '', role: '', assignedProperties: [], phone: '', whatsapp: '' },
     loginEmail: '', loginPassword: '', loginError: '', loading: false,
     activePage: 'attendance',
     sidebarCollapsed: false,
@@ -1059,26 +699,36 @@ new Vue({
     myLeads: [], allLeads: []
   },
   computed: {
-    displayLeads() {
-      return this.user.team === 'Sales' ? this.myLeads : this.allLeads;
-    },
+    displayLeads() { return this.user.team === 'Sales' ? this.myLeads : this.allLeads; },
     pageTitle() {
-      const titles = {
-        attendance: 'Attendance',
-        eod:        'End of Day Report',
-        guests:     'Guest Management',
-        helpers:    'Temporary Helpers',
-        leads:      'Sales Leads',
-        profile:    'Profile'
-      };
+      const titles = { attendance: 'Attendance', eod: 'End of Day Report', guests: 'Guest Management', helpers: 'Temporary Helpers', leads: 'Sales Leads', profile: 'Profile' };
       return titles[this.activePage] || '';
     }
   },
   methods: {
-    go(page) {
-      this.activePage = page;
-      this.mobileOpen = false;
+    go(page) { this.activePage = page; this.mobileOpen = false; },
+
+    // WhatsApp sharing methods (always visible)
+    shareAttendanceWhatsApp() {
+      if (!this.user.whatsapp) { alert('WhatsApp number not set for your account. Contact admin.'); return; }
+      let msg = `🏨 *Staff Hub – Attendance*\n\n👤 ${this.user.name}\n📍 ${this.selectedProperty}\n🕒 ${this.attendanceAction}: ${this.attendanceDateTime}`;
+      if (this.attendanceNotes) msg += `\n📝 Notes: ${this.attendanceNotes}`;
+      window.open(`https://wa.me/${this.user.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
     },
+    shareEODWhatsApp() {
+      if (!this.user.whatsapp) { alert('WhatsApp number not set for your account. Contact admin.'); return; }
+      let msg = `🏨 *Staff Hub – EOD Report*\n\n👤 ${this.user.name}\n🏢 ${this.eodProperty}\n📅 ${this.eodDate}\n💰 Sales: ₹${this.eodSales || 0}\n🏠 Occupancy: ${this.eodOccupancy || '—'}%`;
+      if (this.eodMaintenance) msg += `\n🛠️ Maintenance: ${this.eodMaintenance}`;
+      if (this.eodNotes) msg += `\n📝 Notes: ${this.eodNotes}`;
+      window.open(`https://wa.me/${this.user.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
+    },
+    shareLeadWhatsApp() {
+      if (!this.user.whatsapp) { alert('WhatsApp number not set for your account. Contact admin.'); return; }
+      let msg = `🏨 *Staff Hub – New Sales Lead*\n\n👤 ${this.user.name}\n📞 Lead: ${this.lead.name}\n🏢 ${this.lead.property}\n📞 Calls made: ${this.lead.callsMade}\n📈 Status: ${this.lead.status}`;
+      if (this.lead.notes) msg += `\n📝 Notes: ${this.lead.notes}`;
+      window.open(`https://wa.me/${this.user.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
+    },
+
     async login() {
       this.loginError = '';
       if (!this.loginEmail || !this.loginPassword) { this.loginError = 'Email and password required'; return; }
@@ -1106,14 +756,11 @@ new Vue({
           this.fetchOpenCheckIns();
           if (this.user.team === 'Sales') this.fetchMyLeads();
           else this.fetchAllLeads();
-        } else {
-          this.loginError = data.error || 'Login failed';
-        }
-      } catch(e) {
-        if (e.name === 'AbortError') this.loginError = 'Request timed out';
-        else this.loginError = 'Network error. Check API URL.';
-      } finally { this.loading = false; }
+        } else this.loginError = data.error || 'Login failed';
+      } catch(e) { this.loginError = e.name === 'AbortError' ? 'Request timed out' : 'Network error. Check API URL.'; }
+      finally { this.loading = false; }
     },
+
     async submitAttendance() {
       if (!this.selectedProperty) { this.attMsg = '❌ Select property'; return; }
       if (!this.attendanceDateTime) { this.attMsg = '❌ Select date/time'; return; }
@@ -1123,10 +770,11 @@ new Vue({
         const res = await fetch(url);
         const data = await res.json();
         this.attMsg = data.success ? `✅ ${this.attendanceAction} recorded` : '❌ Failed';
-        setTimeout(() => this.attMsg = '', 2500);
+        setTimeout(() => this.attMsg = '', 4000);
       } catch(e) { this.attMsg = '❌ Error'; }
       this.loadingAttendance = false;
     },
+
     async submitEOD() {
       if (!this.eodProperty) { this.eodMsg = '❌ Select property'; return; }
       if (!this.eodDate) { this.eodMsg = '❌ Select date'; return; }
@@ -1140,10 +788,11 @@ new Vue({
           this.eodMsg = '✅ EOD submitted';
           this.eodSales = ''; this.eodOccupancy = ''; this.eodMaintenance = ''; this.eodNotes = '';
         } else this.eodMsg = '❌ Failed';
-        setTimeout(() => this.eodMsg = '', 3000);
+        setTimeout(() => this.eodMsg = '', 4000);
       } catch(e) { this.eodMsg = '❌ Error'; }
       this.loadingEOD = false;
     },
+
     async doGuestCheckIn() {
       if (!this.guestCheckIn.name || !this.guestCheckIn.property || !this.guestCheckIn.datetime) {
         this.guestMsg = '❌ Name, property and datetime required'; return;
@@ -1163,6 +812,7 @@ new Vue({
       } catch(e) { this.guestMsg = '❌ Error'; }
       this.loadingGuest = false;
     },
+
     async doGuestCheckOut() {
       if (!this.guestCheckOut.name || !this.guestCheckOut.property || !this.guestCheckOut.datetime || !this.guestCheckOut.amount) {
         this.guestMsg = '❌ Name, property, datetime and amount required'; return;
@@ -1182,6 +832,7 @@ new Vue({
       } catch(e) { this.guestMsg = '❌ Error'; }
       this.loadingGuest = false;
     },
+
     async fetchOpenCheckIns() {
       try {
         const url = `${API_BASE}?action=getOpenCheckIns&property=${encodeURIComponent(this.guestCheckOut.property || '')}`;
@@ -1190,6 +841,7 @@ new Vue({
         if (data.success) this.openCheckIns = data.data;
       } catch(e) {}
     },
+
     async addHelper() {
       if (!this.helperName || !this.helperProperty || !this.helperDate) {
         this.helperMsg = '❌ Fill all fields'; return;
@@ -1208,6 +860,7 @@ new Vue({
       } catch(e) { this.helperMsg = '❌ Error'; }
       this.loadingHelpers = false;
     },
+
     async fetchHelpers() {
       try {
         const url = `${API_BASE}?action=getHelpers&managerEmail=${encodeURIComponent(this.loginEmail)}`;
@@ -1216,6 +869,7 @@ new Vue({
         if (data.success) this.recentHelpers = data.data;
       } catch(e) {}
     },
+
     async addLead() {
       if (!this.lead.name || !this.lead.property) {
         this.leadMsg = '❌ Lead name and property required'; return;
@@ -1231,10 +885,11 @@ new Vue({
           if (this.user.team === 'Sales') this.fetchMyLeads();
           else this.fetchAllLeads();
         } else this.leadMsg = '❌ Failed';
-        setTimeout(() => this.leadMsg = '', 3000);
+        setTimeout(() => this.leadMsg = '', 4000);
       } catch(e) { this.leadMsg = '❌ Error'; }
       this.loadingLead = false;
     },
+
     async fetchMyLeads() {
       try {
         const url = `${API_BASE}?action=getLeads&staffEmail=${encodeURIComponent(this.loginEmail)}&team=Sales`;
@@ -1243,6 +898,7 @@ new Vue({
         if (data.success) this.myLeads = data.data;
       } catch(e) {}
     },
+
     async fetchAllLeads() {
       try {
         const url = `${API_BASE}?action=getLeads&staffEmail=${encodeURIComponent(this.loginEmail)}&team=Management`;
@@ -1251,9 +907,10 @@ new Vue({
         if (data.success) this.allLeads = data.data;
       } catch(e) {}
     },
+
     logout() {
       this.loggedIn = false;
-      this.user = { name: '', team: '', role: '', assignedProperties: [], phone: '' };
+      this.user = { name: '', team: '', role: '', assignedProperties: [], phone: '', whatsapp: '' };
       this.loginEmail = this.loginPassword = '';
       this.recentHelpers = []; this.openCheckIns = []; this.myLeads = []; this.allLeads = [];
       this.attMsg = this.eodMsg = this.helperMsg = this.guestMsg = this.leadMsg = '';
