@@ -4,39 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
   <meta name="theme-color" content="#0F3B2C">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Staff Hub | Sleepy Stays</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: #F1F5F9;
       color: #0F172A;
       padding-bottom: 2rem;
     }
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 1rem;
-    }
+    .container { max-width: 700px; margin: 0 auto; padding: 1rem; }
     .card {
       background: white;
       border-radius: 28px;
       padding: 1.5rem;
       box-shadow: 0 8px 20px rgba(0,0,0,0.05);
       margin-bottom: 1.25rem;
-      transition: all 0.2s;
     }
-    h1, h2, h3 {
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
+    h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; }
     h1 { font-size: 1.8rem; color: #0F3B2C; }
     h2 { font-size: 1.35rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
     h3 { font-size: 1.1rem; margin: 1rem 0 0.5rem; color: #1E293B; }
@@ -55,7 +43,6 @@
       border: 1.5px solid #E2E8F0;
       border-radius: 20px;
       background: #FFFFFF;
-      transition: 0.2s;
       font-family: inherit;
     }
     input:focus, select:focus, textarea:focus {
@@ -75,7 +62,6 @@
       margin-top: 1rem;
       cursor: pointer;
       transition: 0.2s;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
     button:active { transform: scale(0.97); background: #1E5A45; }
     button:disabled { opacity: 0.6; transform: none; cursor: not-allowed; }
@@ -93,7 +79,6 @@
       position: sticky;
       top: 0;
       z-index: 10;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
     .logout {
       background: rgba(255,255,255,0.2);
@@ -102,9 +87,7 @@
       font-size: 0.85rem;
       font-weight: 500;
       cursor: pointer;
-      transition: 0.2s;
     }
-    .logout:active { background: rgba(255,255,255,0.35); }
     .property-badge {
       background: #E6F7F2;
       color: #0F3B2C;
@@ -135,20 +118,7 @@
     th { font-weight: 600; color: #475569; }
     @media (min-width: 640px) {
       .grid-2 { grid-template-columns: 1fr 1fr; }
-      .container { max-width: 800px; }
-    }
-    @media (max-width: 480px) {
-      .card { padding: 1.2rem; }
-      button { padding: 0.8rem; }
-    }
-    .datalist-suggestion { font-size: 0.9rem; }
-    .badge-mgmt {
-      background: #FEF3C7;
-      color: #B45309;
-      padding: 0.2rem 0.6rem;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      font-weight: 600;
+      .container { max-width: 900px; }
     }
   </style>
 </head>
@@ -171,14 +141,14 @@
     <div class="navbar">
       <strong>🏡 Staff Hub</strong>
       <div style="display: flex; gap: 0.75rem; align-items: center;">
-        <span style="font-size: 0.85rem;">{{ user.name }}</span>
+        <span style="font-size: 0.85rem;">{{ user.name }} ({{ user.team }})</span>
         <span class="logout" @click="logout">Logout</span>
       </div>
     </div>
     <div class="container">
-      <!-- row: attendance + EOD -->
+      <!-- Row 1: Attendance + EOD (both teams) -->
       <div class="grid-2">
-        <!-- Staff Attendance -->
+        <!-- Attendance Card -->
         <div class="card">
           <h2>📍 Attendance</h2>
           <label>Property</label>
@@ -198,7 +168,7 @@
           <div v-if="attMsg" :class="attMsg.includes('✅')?'success':'error'">{{ attMsg }}</div>
         </div>
 
-        <!-- EOD Report (with Maintenance) -->
+        <!-- EOD Report Card (both teams) -->
         <div class="card">
           <h2>📝 End of Day</h2>
           <label>Property</label>
@@ -234,14 +204,14 @@
             </select>
             <label>Check‑in date & time</label>
             <input type="datetime-local" v-model="guestCheckIn.datetime">
-            <label>Room / Unit (optional)</label>
+            <label>Room / Unit</label>
             <input type="text" v-model="guestCheckIn.room" placeholder="e.g., 101">
             <button @click="doGuestCheckIn" :disabled="loadingGuest">Check in guest</button>
           </div>
           <div>
             <h3>➖ Check out</h3>
             <label>Guest name</label>
-            <input type="text" v-model="guestCheckOut.name" placeholder="Start typing name" list="openGuestsList">
+            <input type="text" v-model="guestCheckOut.name" placeholder="Start typing" list="openGuestsList">
             <datalist id="openGuestsList">
               <option v-for="g in openCheckIns" :value="g.GuestName" :key="g.Timestamp"></option>
             </datalist>
@@ -253,12 +223,12 @@
             <input type="datetime-local" v-model="guestCheckOut.datetime">
             <label>Amount paid (₹)</label>
             <input type="number" v-model="guestCheckOut.amount" placeholder="0">
-            <label>Notes / payment method</label>
-            <textarea v-model="guestCheckOut.notes" rows="2" placeholder="Card / cash / UPI..."></textarea>
+            <label>Notes</label>
+            <textarea v-model="guestCheckOut.notes" rows="2" placeholder="Payment method..."></textarea>
             <button @click="doGuestCheckOut" :disabled="loadingGuest">Check out & record payment</button>
           </div>
         </div>
-        <div v-if="guestMsg" :class="guestMsg.includes('✅')?'success':'error'" style="margin-top: 0.75rem;">{{ guestMsg }}</div>
+        <div v-if="guestMsg" :class="guestMsg.includes('✅')?'success':'error'" style="margin-top:0.75rem">{{ guestMsg }}</div>
       </div>
 
       <!-- Helper Log (only Management) -->
@@ -293,73 +263,94 @@
               </tr>
             </tbody>
           </table>
-          <div v-else class="error" style="text-align: center; padding: 0.5rem;">No helpers logged</div>
+          <div v-else class="error" style="text-align:center">No helpers logged</div>
         </div>
       </div>
 
-      <!-- My info -->
+      <!-- Sales Leads Tracker (only Sales team) -->
+      <div class="card" v-if="user.team === 'Sales'">
+        <h2>📞 Sales Leads</h2>
+        <div class="grid-2">
+          <div>
+            <label>Lead name *</label>
+            <input type="text" v-model="lead.name" placeholder="Full name">
+            <label>Property *</label>
+            <select v-model="lead.property">
+              <option v-for="p in user.assignedProperties" :value="p">{{ p }}</option>
+            </select>
+            <label>Contact (phone/email)</label>
+            <input type="text" v-model="lead.contact" placeholder="Phone or email">
+          </div>
+          <div>
+            <label>Calls made</label>
+            <input type="number" v-model="lead.callsMade" min="0">
+            <label>Status</label>
+            <select v-model="lead.status">
+              <option>New</option><option>Contacted</option><option>Negotiation</option><option>Won</option><option>Lost</option>
+            </select>
+            <label>Notes</label>
+            <textarea v-model="lead.notes" rows="2" placeholder="Interests, follow-up..."></textarea>
+          </div>
+        </div>
+        <button @click="addLead" :disabled="loadingLead">+ Add lead</button>
+        <div v-if="leadMsg" :class="leadMsg.includes('✅')?'success':'error'">{{ leadMsg }}</div>
+        <hr>
+        <h3>📋 My recent leads</h3>
+        <div style="overflow-x: auto;">
+          <table v-if="myLeads.length">
+            <thead><tr><th>Date</th><th>Name</th><th>Property</th><th>Calls</th><th>Status</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr v-for="l in myLeads.slice(0,8)" :key="l.Timestamp">
+                <td>{{ l.Timestamp?.slice(0,10) }}</td><td>{{ l.LeadName }}</td><td>{{ l.Property }}</td><td>{{ l.CallsMade }}</td><td>{{ l.Status }}</td><td>{{ l.Notes }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div v-else class="error" style="text-align:center">No leads yet</div>
+        </div>
+      </div>
+
+      <!-- Info card (both teams) -->
       <div class="card">
         <h3>🏢 Your properties</h3>
         <div><span v-for="prop in user.assignedProperties" :key="prop" class="property-badge">{{ prop }}</span></div>
         <hr>
-        <p><strong>📞 Phone</strong> {{ user.phone }}<br>
-        <strong>👥 Team</strong> {{ user.team }} · {{ user.role }}</p>
+        <p><strong>📞 Phone:</strong> {{ user.phone }}<br><strong>👥 Team:</strong> {{ user.team }} · {{ user.role }}</p>
       </div>
     </div>
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.min.js"></script>
 <script>
-const API_BASE = 'https://script.google.com/macros/s/AKfycbzUBuj4WyHOOrGcBkr14ZFFVDfKEgLWBNhBDtZ953-k_pMf7E9e9LrKd9PI77nE_sct/exec'; // <-- REPLACE
+const API_BASE = 'https://script.google.com/macros/s/AKfycbwEF6-m-Uk8_k1dozlsYFuhrWVjAn2ulZZt4XZN4twNCHx2KnViFK12nEsSAD9hQElV/exec'; // REPLACE WITH YOUR WEB APP URL
 
 new Vue({
   el: '#app',
   data: {
     loggedIn: false,
     user: { name: '', team: '', role: '', assignedProperties: [], phone: '' },
-    loginEmail: '',
-    loginPassword: '',
-    loginError: '',
-    loading: false,
+    loginEmail: '', loginPassword: '', loginError: '', loading: false,
     // attendance
-    selectedProperty: '',
-    attendanceAction: 'CheckIn',
-    attendanceDateTime: new Date().toISOString().slice(0,16),
-    attendanceNotes: '',
-    attMsg: '',
-    loadingAttendance: false,
+    selectedProperty: '', attendanceAction: 'CheckIn', attendanceDateTime: new Date().toISOString().slice(0,16),
+    attendanceNotes: '', attMsg: '', loadingAttendance: false,
     // EOD
-    eodProperty: '',
-    eodDate: new Date().toISOString().slice(0,10),
-    eodSales: '',
-    eodOccupancy: '',
-    eodMaintenance: '',
-    eodNotes: '',
-    eodMsg: '',
-    loadingEOD: false,
+    eodProperty: '', eodDate: new Date().toISOString().slice(0,10),
+    eodSales: '', eodOccupancy: '', eodMaintenance: '', eodNotes: '', eodMsg: '', loadingEOD: false,
     // guest
     guestCheckIn: { name: '', property: '', datetime: '', room: '' },
     guestCheckOut: { name: '', property: '', datetime: '', amount: '', notes: '' },
-    guestMsg: '',
-    loadingGuest: false,
-    openCheckIns: [],
-    // helpers
-    helperName: '',
-    helperProperty: '',
-    helperDate: new Date().toISOString().slice(0,10),
-    helperNotes: '',
-    helperMsg: '',
-    recentHelpers: [],
-    loadingHelpers: false
+    guestMsg: '', loadingGuest: false, openCheckIns: [],
+    // helper
+    helperName: '', helperProperty: '', helperDate: new Date().toISOString().slice(0,10),
+    helperNotes: '', helperMsg: '', recentHelpers: [], loadingHelpers: false,
+    // lead
+    lead: { name: '', contact: '', callsMade: 0, status: 'New', notes: '', property: '' },
+    leadMsg: '', loadingLead: false, myLeads: []
   },
   methods: {
     async login() {
       this.loginError = '';
-      if (!this.loginEmail || !this.loginPassword) {
-        this.loginError = 'Email and password required';
-        return;
-      }
+      if (!this.loginEmail || !this.loginPassword) { this.loginError = 'Email and password required'; return; }
       this.loading = true;
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 12000);
@@ -377,10 +368,14 @@ new Vue({
             this.helperProperty = this.user.assignedProperties[0];
             this.guestCheckIn.property = this.user.assignedProperties[0];
             this.guestCheckOut.property = this.user.assignedProperties[0];
+            this.lead.property = this.user.assignedProperties[0];
           }
           if (this.user.team === 'Management') {
             this.fetchHelpers();
             this.fetchOpenCheckIns();
+          }
+          if (this.user.team === 'Sales') {
+            this.fetchMyLeads();
           }
         } else {
           this.loginError = data.error || 'Login failed';
@@ -388,9 +383,7 @@ new Vue({
       } catch(e) {
         if (e.name === 'AbortError') this.loginError = 'Request timed out';
         else this.loginError = 'Network error. Check API URL.';
-      } finally {
-        this.loading = false;
-      }
+      } finally { this.loading = false; }
     },
     async submitAttendance() {
       if (!this.selectedProperty) { this.attMsg = '❌ Select property'; return; }
@@ -424,8 +417,7 @@ new Vue({
     },
     async doGuestCheckIn() {
       if (!this.guestCheckIn.name || !this.guestCheckIn.property || !this.guestCheckIn.datetime) {
-        this.guestMsg = '❌ Name, property and datetime required';
-        return;
+        this.guestMsg = '❌ Name, property and datetime required'; return;
       }
       this.loadingGuest = true;
       try {
@@ -434,8 +426,7 @@ new Vue({
         const data = await res.json();
         if (data.success) {
           this.guestMsg = `✅ ${data.message}`;
-          this.guestCheckIn.name = '';
-          this.guestCheckIn.room = '';
+          this.guestCheckIn.name = ''; this.guestCheckIn.room = '';
           this.guestCheckIn.datetime = new Date().toISOString().slice(0,16);
           this.fetchOpenCheckIns();
         } else this.guestMsg = '❌ Failed';
@@ -445,8 +436,7 @@ new Vue({
     },
     async doGuestCheckOut() {
       if (!this.guestCheckOut.name || !this.guestCheckOut.property || !this.guestCheckOut.datetime || !this.guestCheckOut.amount) {
-        this.guestMsg = '❌ Name, property, datetime and amount required';
-        return;
+        this.guestMsg = '❌ Name, property, datetime and amount required'; return;
       }
       this.loadingGuest = true;
       try {
@@ -455,9 +445,7 @@ new Vue({
         const data = await res.json();
         if (data.success) {
           this.guestMsg = `✅ ${data.message}`;
-          this.guestCheckOut.name = '';
-          this.guestCheckOut.amount = '';
-          this.guestCheckOut.notes = '';
+          this.guestCheckOut.name = ''; this.guestCheckOut.amount = ''; this.guestCheckOut.notes = '';
           this.guestCheckOut.datetime = new Date().toISOString().slice(0,16);
           this.fetchOpenCheckIns();
         } else this.guestMsg = '❌ Failed';
@@ -475,8 +463,7 @@ new Vue({
     },
     async addHelper() {
       if (!this.helperName || !this.helperProperty || !this.helperDate) {
-        this.helperMsg = '❌ Fill all fields';
-        return;
+        this.helperMsg = '❌ Fill all fields'; return;
       }
       this.loadingHelpers = true;
       try {
@@ -485,8 +472,7 @@ new Vue({
         const data = await res.json();
         if (data.success) {
           this.helperMsg = '✅ Helper logged';
-          this.helperName = '';
-          this.helperNotes = '';
+          this.helperName = ''; this.helperNotes = '';
           this.fetchHelpers();
         } else this.helperMsg = '❌ Failed';
         setTimeout(() => this.helperMsg = '', 3000);
@@ -501,13 +487,38 @@ new Vue({
         if (data.success) this.recentHelpers = data.data;
       } catch(e) { console.error(e); }
     },
+    async addLead() {
+      if (!this.lead.name || !this.lead.property) {
+        this.leadMsg = '❌ Lead name and property required'; return;
+      }
+      this.loadingLead = true;
+      try {
+        const url = `${API_BASE}?action=addLead&staffEmail=${encodeURIComponent(this.loginEmail)}&property=${encodeURIComponent(this.lead.property)}&leadName=${encodeURIComponent(this.lead.name)}&contact=${encodeURIComponent(this.lead.contact)}&callsMade=${this.lead.callsMade}&status=${this.lead.status}&notes=${encodeURIComponent(this.lead.notes)}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        if (data.success) {
+          this.leadMsg = '✅ Lead added';
+          this.lead = { name: '', contact: '', callsMade: 0, status: 'New', notes: '', property: this.user.assignedProperties[0] };
+          this.fetchMyLeads();
+        } else this.leadMsg = '❌ Failed';
+        setTimeout(() => this.leadMsg = '', 3000);
+      } catch(e) { this.leadMsg = 'Error'; }
+      this.loadingLead = false;
+    },
+    async fetchMyLeads() {
+      try {
+        const url = `${API_BASE}?action=getLeads&staffEmail=${encodeURIComponent(this.loginEmail)}&team=${this.user.team}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        if (data.success) this.myLeads = data.data;
+      } catch(e) { console.error(e); }
+    },
     logout() {
       this.loggedIn = false;
       this.user = { name: '', team: '', role: '', assignedProperties: [], phone: '' };
       this.loginEmail = this.loginPassword = '';
-      this.recentHelpers = [];
-      this.openCheckIns = [];
-      this.attMsg = this.eodMsg = this.helperMsg = this.guestMsg = '';
+      this.recentHelpers = []; this.openCheckIns = []; this.myLeads = [];
+      this.attMsg = this.eodMsg = this.helperMsg = this.guestMsg = this.leadMsg = '';
     }
   }
 });
