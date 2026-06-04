@@ -136,7 +136,7 @@
     </div>
   </div>
 
-  <!-- DASHBOARD -->
+  <!-- DASHBOARD (All blocks visible to both teams) -->
   <div v-else>
     <div class="navbar">
       <strong>🏡 Staff Hub</strong>
@@ -146,7 +146,7 @@
       </div>
     </div>
     <div class="container">
-      <!-- Row 1: Attendance + EOD (both teams) -->
+      <!-- Row 1: Attendance + EOD -->
       <div class="grid-2">
         <!-- Attendance Card -->
         <div class="card">
@@ -168,7 +168,7 @@
           <div v-if="attMsg" :class="attMsg.includes('✅')?'success':'error'">{{ attMsg }}</div>
         </div>
 
-        <!-- EOD Report Card (both teams) -->
+        <!-- EOD Report Card -->
         <div class="card">
           <h2>📝 End of Day</h2>
           <label>Property</label>
@@ -190,8 +190,8 @@
         </div>
       </div>
 
-      <!-- Guest Management (only Management) -->
-      <div class="card" v-if="user.team === 'Management'">
+      <!-- Guest Management (both teams) -->
+      <div class="card">
         <h2>🧑‍🤝‍🧑 Guest check‑in / out</h2>
         <div class="grid-2">
           <div>
@@ -231,8 +231,8 @@
         <div v-if="guestMsg" :class="guestMsg.includes('✅')?'success':'error'" style="margin-top:0.75rem">{{ guestMsg }}</div>
       </div>
 
-      <!-- Helper Log (only Management) -->
-      <div class="card" v-if="user.team === 'Management'">
+      <!-- Helper Log (both teams) -->
+      <div class="card">
         <h2>🧑‍🌾 Temporary helpers</h2>
         <div class="grid-2">
           <div>
@@ -267,8 +267,8 @@
         </div>
       </div>
 
-      <!-- Sales Leads Tracker (only Sales team) -->
-      <div class="card" v-if="user.team === 'Sales'">
+      <!-- Sales Leads Tracker (both teams: add lead, view leads – different views) -->
+      <div class="card">
         <h2>📞 Sales Leads</h2>
         <div class="grid-2">
           <div>
@@ -295,21 +295,30 @@
         <button @click="addLead" :disabled="loadingLead">+ Add lead</button>
         <div v-if="leadMsg" :class="leadMsg.includes('✅')?'success':'error'">{{ leadMsg }}</div>
         <hr>
-        <h3>📋 My recent leads</h3>
+        <!-- Conditional lead table: Sales sees own leads, Management sees all leads -->
+        <h3 v-if="user.team === 'Sales'">📋 My recent leads</h3>
+        <h3 v-else>📊 All sales leads</h3>
         <div style="overflow-x: auto;">
-          <table v-if="myLeads.length">
-            <thead><tr><th>Date</th><th>Name</th><th>Property</th><th>Calls</th><th>Status</th><th>Notes</th></tr></thead>
+          <table v-if="displayLeads.length">
+            <thead><tr><th>Date</th><th>Staff</th><th>Lead</th><th>Property</th><th>Calls</th><th>Status</th><th>Notes</th></tr></thead>
             <tbody>
-              <tr v-for="l in myLeads.slice(0,8)" :key="l.Timestamp">
-                <td>{{ l.Timestamp?.slice(0,10) }}</td><td>{{ l.LeadName }}</td><td>{{ l.Property }}</td><td>{{ l.CallsMade }}</td><td>{{ l.Status }}</td><td>{{ l.Notes }}</td>
+              <tr v-for="l in displayLeads.slice(0,15)" :key="l.Timestamp">
+                <td>{{ l.Timestamp?.slice(0,10) }}</td>
+                <td v-if="user.team !== 'Sales'">{{ l.StaffEmail?.split('@')[0] }}</td>
+                <td v-if="user.team === 'Sales'">{{ l.LeadName }}</td>
+                <td v-else>{{ l.LeadName }}</td>
+                <td>{{ l.Property }}</td>
+                <td>{{ l.CallsMade }}</td>
+                <td>{{ l.Status }}</td>
+                <td>{{ l.Notes }}</td>
               </tr>
             </tbody>
           </table>
-          <div v-else class="error" style="text-align:center">No leads yet</div>
+          <div v-else class="error" style="text-align:center">No leads found</div>
         </div>
       </div>
 
-      <!-- Info card (both teams) -->
+      <!-- Info card -->
       <div class="card">
         <h3>🏢 Your properties</h3>
         <div><span v-for="prop in user.assignedProperties" :key="prop" class="property-badge">{{ prop }}</span></div>
@@ -345,7 +354,16 @@ new Vue({
     helperNotes: '', helperMsg: '', recentHelpers: [], loadingHelpers: false,
     // lead
     lead: { name: '', contact: '', callsMade: 0, status: 'New', notes: '', property: '' },
-    leadMsg: '', loadingLead: false, myLeads: []
+    leadMsg: '', loadingLead: false,
+    myLeads: [],      // for Sales (own leads)
+    allLeads: []      // for Management (all leads)
+  },
+  computed: {
+    displayLeads() {
+      // Show appropriate leads based on team
+      if (this.user.team === 'Sales') return this.myLeads;
+      return this.allLeads;
+    }
   },
   methods: {
     async login() {
@@ -370,12 +388,14 @@ new Vue({
             this.guestCheckOut.property = this.user.assignedProperties[0];
             this.lead.property = this.user.assignedProperties[0];
           }
-          if (this.user.team === 'Management') {
-            this.fetchHelpers();
-            this.fetchOpenCheckIns();
-          }
+          // Always fetch helpers and open check-ins (both teams)
+          this.fetchHelpers();
+          this.fetchOpenCheckIns();
+          // Fetch leads based on team
           if (this.user.team === 'Sales') {
             this.fetchMyLeads();
+          } else {
+            this.fetchAllLeads();
           }
         } else {
           this.loginError = data.error || 'Login failed';
@@ -499,7 +519,11 @@ new Vue({
         if (data.success) {
           this.leadMsg = '✅ Lead added';
           this.lead = { name: '', contact: '', callsMade: 0, status: 'New', notes: '', property: this.user.assignedProperties[0] };
-          this.fetchMyLeads();
+          if (this.user.team === 'Sales') {
+            this.fetchMyLeads();
+          } else {
+            this.fetchAllLeads();
+          }
         } else this.leadMsg = '❌ Failed';
         setTimeout(() => this.leadMsg = '', 3000);
       } catch(e) { this.leadMsg = 'Error'; }
@@ -507,17 +531,25 @@ new Vue({
     },
     async fetchMyLeads() {
       try {
-        const url = `${API_BASE}?action=getLeads&staffEmail=${encodeURIComponent(this.loginEmail)}&team=${this.user.team}`;
+        const url = `${API_BASE}?action=getLeads&staffEmail=${encodeURIComponent(this.loginEmail)}&team=Sales`;
         const res = await fetch(url);
         const data = await res.json();
         if (data.success) this.myLeads = data.data;
+      } catch(e) { console.error(e); }
+    },
+    async fetchAllLeads() {
+      try {
+        const url = `${API_BASE}?action=getLeads&staffEmail=${encodeURIComponent(this.loginEmail)}&team=Management`;
+        const res = await fetch(url);
+        const data = await res.json();
+        if (data.success) this.allLeads = data.data;
       } catch(e) { console.error(e); }
     },
     logout() {
       this.loggedIn = false;
       this.user = { name: '', team: '', role: '', assignedProperties: [], phone: '' };
       this.loginEmail = this.loginPassword = '';
-      this.recentHelpers = []; this.openCheckIns = []; this.myLeads = [];
+      this.recentHelpers = []; this.openCheckIns = []; this.myLeads = []; this.allLeads = [];
       this.attMsg = this.eodMsg = this.helperMsg = this.guestMsg = this.leadMsg = '';
     }
   }
