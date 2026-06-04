@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1E3A8A">
+    <title>Staff Hub | Sales & Management</title>
+    <style>
+        * { box-sizing: border-box; font-family: system-ui, 'Segoe UI', Roboto, sans-serif; }
+        body { margin: 0; background: #f3f4f6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+        .card { background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 1.5rem; }
+        h1, h2, h3 { color: #1e3a8a; margin-top: 0; }
+        input, select, textarea, button { width: 100%; padding: 0.75rem; margin: 0.5rem 0; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem; }
+        button { background: #1e3a8a; color: white; font-weight: bold; cursor: pointer; border: none; transition: 0.2s; }
+        button:hover { background: #3b82f6; }
+        button:disabled { background: #9ca3af; cursor: not-allowed; }
+        .error { color: #dc2626; margin-top: 0.5rem; }
+        .success { color: #16a34a; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+        .navbar { background: #1e3a8a; color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .logout { background: #ef4444; padding: 0.3rem 0.8rem; border-radius: 0.5rem; cursor: pointer; }
+        .property-badge { background: #e0e7ff; color: #1e3a8a; padding: 0.2rem 0.5rem; border-radius: 1rem; font-size: 0.8rem; margin-right: 0.3rem; display: inline-block; margin-bottom: 0.3rem; }
+        hr { margin: 1rem 0; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #e5e7eb; padding: 0.5rem; text-align: left; }
+        th { background: #eef2ff; }
+        @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!-- LOGIN SCREEN -->
+    <div v-if="!loggedIn" class="container" style="max-width: 400px; margin-top: 3rem;">
+        <div class="card">
+            <h1>🏨 Staff Hub</h1>
+            <p>Sales & Management Teams</p>
+            <input type="email" v-model="loginEmail" placeholder="Email">
+            <input type="password" v-model="loginPassword" placeholder="Password">
+            <button @click="login" :disabled="loading">Sign In</button>
+            <div class="error" v-if="loginError">{{ loginError }}</div>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD -->
+    <div v-else>
+        <div class="navbar">
+            <strong>Staff Hub</strong>
+            <span>👋 {{ user.name }} ({{ user.team }} · {{ user.role }})</span>
+            <span class="logout" @click="logout">Logout</span>
+        </div>
+        <div class="container">
+            <!-- Common grid: Attendance + EOD for all employees -->
+            <div class="grid">
+                <!-- Attendance Card -->
+                <div class="card">
+                    <h2>📍 Attendance</h2>
+                    <label>Property</label>
+                    <select v-model="selectedProperty">
+                        <option v-for="p in user.assignedProperties" :value="p">{{ p }}</option>
+                    </select>
+                    <label>Action</label>
+                    <select v-model="attendanceAction">
+                        <option value="CheckIn">Check In</option>
+                        <option value="CheckOut">Check Out</option>
+                    </select>
+                    <input type="datetime-local" v-model="attendanceDateTime">
+                    <textarea v-model="attendanceNotes" placeholder="Optional notes"></textarea>
+                    <button @click="submitAttendance" :disabled="loadingAttendance">Record</button>
+                    <div v-if="attMsg" :class="attMsg.includes('✅')?'success':'error'">{{ attMsg }}</div>
+                </div>
+
+                <!-- EOD Report Card -->
+                <div class="card">
+                    <h2>📝 End of Day Report</h2>
+                    <label>Property</label>
+                    <select v-model="eodProperty">
+                        <option v-for="p in user.assignedProperties" :value="p">{{ p }}</option>
+                    </select>
+                    <label>Report Date</label>
+                    <input type="date" v-model="eodDate">
+                    <label>Sales Amount (₹)</label>
+                    <input type="number" v-model="eodSales" placeholder="0">
+                    <label>Occupancy (%)</label>
+                    <input type="text" v-model="eodOccupancy" placeholder="e.g., 85%">
+                    <textarea v-model="eodNotes" placeholder="Additional notes"></textarea>
+                    <button @click="submitEOD" :disabled="loadingEOD">Submit EOD</button>
+                    <div v-if="eodMsg" :class="eodMsg.includes('✅')?'success':'error'">{{ eodMsg }}</div>
+                </div>
+            </div>
+
+            <!-- Helper Management (only for Management team) -->
+            <div class="card" v-if="user.team === 'Management'">
+                <h2>🧑‍🌾 Helper Log</h2>
+                <div class="grid" style="grid-template-columns: 1fr 1fr;">
+                    <div>
+                        <label>Helper Name</label>
+                        <input type="text" v-model="helperName" placeholder="e.g., Raju">
+                        <label>Property</label>
+                        <select v-model="helperProperty">
+                            <option v-for="p in user.assignedProperties" :value="p">{{ p }}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Work Date</label>
+                        <input type="date" v-model="helperDate">
+                        <label>Notes (optional)</label>
+                        <textarea v-model="helperNotes" placeholder="What they helped with"></textarea>
+                    </div>
+                </div>
+                <button @click="addHelper" :disabled="loadingHelpers">Log Helper</button>
+                <div v-if="helperMsg" :class="helperMsg.includes('✅')?'success':'error'">{{ helperMsg }}</div>
+                <hr>
+                <h3>Recent Helpers</h3>
+                <div style="overflow-x: auto;">
+                    <table v-if="recentHelpers.length">
+                        <thead>
+                            <tr><th>Date</th><th>Name</th><th>Property</th><th>Notes</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="h in recentHelpers.slice(0,10)" :key="h.Timestamp">
+                                <td>{{ h.WorkDate }}</td><td>{{ h.HelperName }}</td><td>{{ h.Property }}</td><td>{{ h.Notes }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div v-else>No helpers logged yet.</div>
+                </div>
+            </div>
+
+            <!-- Properties & Contact Info -->
+            <div class="card">
+                <h3>🏢 Your Properties</h3>
+                <div>
+                    <span v-for="prop in user.assignedProperties" :key="prop" class="property-badge">{{ prop }}</span>
+                </div>
+                <hr>
+                <p><strong>📞 Phone:</strong> {{ user.phone }}</p>
+                <p><strong>👥 Team:</strong> {{ user.team }} | <strong>Role:</strong> {{ user.role }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+const API_BASE = 'https://script.google.com/macros/s/AKfycby9Il5BbpmH0ljNmBD5r4WDrTEye0zhvmcLKhtp0FYE-d5NFGSPmnmEgHR5hVvjcZ8/exec'; // REPLACE WITH YOUR WEB APP URL
+
+new Vue({
+    el: '#app',
+    data: {
+        loggedIn: false,
+        user: { name: '', team: '', role: '', assignedProperties: [], phone: '' },
+        loginEmail: '',
+        loginPassword: '',
+        loginError: '',
+        loading: false,
+        // Attendance
+        selectedProperty: '',
+        attendanceAction: 'CheckIn',
+        attendanceDateTime: new Date().toISOString().slice(0,16),
+        attendanceNotes: '',
+        attMsg: '',
+        loadingAttendance: false,
+        // EOD
+        eodProperty: '',
+        eodDate: new Date().toISOString().slice(0,10),
+        eodSales: '',
+        eodOccupancy: '',
+        eodNotes: '',
+        eodMsg: '',
+        loadingEOD: false,
+        // Helpers
+        helperName: '',
+        helperProperty: '',
+        helperDate: new Date().toISOString().slice(0,10),
+        helperNotes: '',
+        helperMsg: '',
+        recentHelpers: [],
+        loadingHelpers: false
+    },
+    methods: {
+        async login() {
+            this.loginError = '';
+            if (!this.loginEmail || !this.loginPassword) {
+                this.loginError = 'Email and password required';
+                return;
+            }
+            this.loading = true;
+            try {
+                const url = `${API_BASE}?action=login&email=${encodeURIComponent(this.loginEmail)}&password=${encodeURIComponent(this.loginPassword)}`;
+                const res = await fetch(url);
+                const data = await res.json();
+                if (data.success) {
+                    this.user = data;
+                    this.loggedIn = true;
+                    // Pre-select first property for convenience
+                    if (this.user.assignedProperties.length) {
+                        this.selectedProperty = this.user.assignedProperties[0];
+                        this.eodProperty = this.user.assignedProperties[0];
+                        this.helperProperty = this.user.assignedProperties[0];
+                    }
+                    // If management, fetch helpers
+                    if (this.user.team === 'Management') {
+                        this.fetchHelpers();
+                    }
+                } else {
+                    this.loginError = data.error || 'Login failed';
+                }
+            } catch(e) {
+                this.loginError = 'Network error. Check API URL.';
+            }
+            this.loading = false;
+        },
+        async submitAttendance() {
+            if (!this.selectedProperty) { this.attMsg = '❌ Select a property'; return; }
+            if (!this.attendanceDateTime) { this.attMsg = '❌ Select date/time'; return; }
+            this.loadingAttendance = true;
+            try {
+                const url = `${API_BASE}?action=checkInOut&email=${encodeURIComponent(this.loginEmail)}&property=${encodeURIComponent(this.selectedProperty)}&action=${this.attendanceAction}&datetime=${encodeURIComponent(this.attendanceDateTime)}&notes=${encodeURIComponent(this.attendanceNotes)}`;
+                const res = await fetch(url);
+                const data = await res.json();
+                if (data.success) this.attMsg = `✅ ${this.attendanceAction} recorded for ${this.selectedProperty}`;
+                else this.attMsg = '❌ Failed';
+                setTimeout(() => this.attMsg = '', 3000);
+            } catch(e) { this.attMsg = 'Error'; }
+            this.loadingAttendance = false;
+        },
+        async submitEOD() {
+            if (!this.eodProperty) { this.eodMsg = '❌ Select property'; return; }
+            if (!this.eodDate) { this.eodMsg = '❌ Select date'; return; }
+            if (!this.eodSales) this.eodSales = 0;
+            this.loadingEOD = true;
+            try {
+                const url = `${API_BASE}?action=submitEOD&email=${encodeURIComponent(this.loginEmail)}&property=${encodeURIComponent(this.eodProperty)}&date=${this.eodDate}&sales=${this.eodSales}&occupancy=${encodeURIComponent(this.eodOccupancy)}&notes=${encodeURIComponent(this.eodNotes)}`;
+                const res = await fetch(url);
+                const data = await res.json();
+                if (data.success) {
+                    this.eodMsg = '✅ EOD submitted';
+                    this.eodSales = '';
+                    this.eodOccupancy = '';
+                    this.eodNotes = '';
+                } else {
+                    this.eodMsg = '❌ Submission failed';
+                }
+                setTimeout(() => this.eodMsg = '', 3000);
+            } catch(e) { this.eodMsg = 'Error'; }
+            this.loadingEOD = false;
+        },
+        async addHelper() {
+            if (!this.helperName || !this.helperProperty || !this.helperDate) {
+                this.helperMsg = '❌ Fill all fields';
+                return;
+            }
+            this.loadingHelpers = true;
+            try {
+                const url = `${API_BASE}?action=addHelper&managerEmail=${encodeURIComponent(this.loginEmail)}&helperName=${encodeURIComponent(this.helperName)}&property=${encodeURIComponent(this.helperProperty)}&workDate=${this.helperDate}&notes=${encodeURIComponent(this.helperNotes)}`;
+                const res = await fetch(url);
+                const data = await res.json();
+                if (data.success) {
+                    this.helperMsg = '✅ Helper logged';
+                    this.helperName = '';
+                    this.helperNotes = '';
+                    this.fetchHelpers(); // refresh list
+                } else {
+                    this.helperMsg = '❌ Failed';
+                }
+                setTimeout(() => this.helperMsg = '', 3000);
+            } catch(e) { this.helperMsg = 'Error'; }
+            this.loadingHelpers = false;
+        },
+        async fetchHelpers() {
+            try {
+                const url = `${API_BASE}?action=getHelpers&managerEmail=${encodeURIComponent(this.loginEmail)}`;
+                const res = await fetch(url);
+                const data = await res.json();
+                if (data.success) this.recentHelpers = data.data;
+            } catch(e) { console.error('Fetch helpers error:', e); }
+        },
+        logout() {
+            this.loggedIn = false;
+            this.user = { name: '', team: '', role: '', assignedProperties: [], phone: '' };
+            this.loginEmail = '';
+            this.loginPassword = '';
+            this.recentHelpers = [];
+            this.attMsg = '';
+            this.eodMsg = '';
+            this.helperMsg = '';
+        }
+    }
+});
+</script>
+</body>
+</html>
