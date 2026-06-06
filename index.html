@@ -703,6 +703,13 @@
         width: var(--sidebar-full) !important;
       }
       .sidebar.mobile-open { transform: translateX(0); }
+      /* Force full labels visible when drawer is open on mobile */
+      .sidebar.mobile-open .sb-wordmark,
+      .sidebar.mobile-open .sb-section-label,
+      .sidebar.mobile-open .ni-label,
+      .sidebar.mobile-open .sb-user-meta,
+      .sidebar.mobile-open .lo-label { opacity: 1 !important; width: auto !important; pointer-events: auto !important; }
+      .sidebar.mobile-open .sb-toggle { display: none; }
       .main { margin-left: 0 !important; }
       #mobileMenuBtn { display: flex; }
       .content { padding: 1rem; }
