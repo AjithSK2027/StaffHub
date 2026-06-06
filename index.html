@@ -63,7 +63,6 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ── ICON HELPER ────────────────────────────────────────── */
     .icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .icon svg { display: block; }
 
@@ -574,955 +573,139 @@
       gap: 1.25rem;
     }
     @media (min-width: 680px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+      gap: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    .stat-card {
+      background: var(--s50);
+      border-radius: var(--r-lg);
+      padding: 0.9rem;
+      text-align: center;
+      border: 1px solid var(--s200);
+    }
+    .stat-number { font-size: 1.8rem; font-weight: 800; color: var(--g700); line-height: 1; margin-bottom: 0.25rem; }
+    .stat-label { font-size: 0.7rem; font-weight: 600; color: var(--s500); text-transform: uppercase; }
 
-    /* ── DIVIDER ────────────────────────────────────────────── */
     .divider { border: none; border-top: 1px solid var(--s200); margin: 1rem 0; }
-
-    /* ── TOAST MESSAGES ─────────────────────────────────────── */
-    .toast {
-      display: none;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 0.9rem;
-      border-radius: 40px;
-      font-size: 0.82rem;
-      font-weight: 500;
-      margin-top: 0.75rem;
-      animation: toastPop 0.18s ease both;
-    }
+    .toast { display: none; align-items: center; gap: 0.5rem; padding: 0.6rem 0.9rem; border-radius: 40px; font-size: 0.82rem; font-weight: 500; margin-top: 0.75rem; animation: toastPop 0.18s ease both; }
     .toast.show { display: inline-flex; }
-    @keyframes toastPop {
-      from { opacity: 0; transform: scale(0.92); }
-      to   { opacity: 1; transform: scale(1); }
-    }
+    @keyframes toastPop { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
     .toast.success { background: rgba(16,185,129,0.1); color: #059669; border: 1px solid rgba(16,185,129,0.2); }
     .toast.error   { background: var(--danger-bg); color: var(--danger); border: 1px solid rgba(239,68,68,0.2); }
 
-    /* ── TABLES ─────────────────────────────────────────────── */
     .table-wrap { overflow-x: auto; margin-top: 0.5rem; }
     table { width: 100%; font-size: 0.8rem; border-collapse: collapse; }
-    thead th {
-      background: var(--s100);
-      color: var(--s500);
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.055em;
-      padding: 0.55rem 0.75rem;
-      text-align: left;
-      border-bottom: 1px solid var(--s200);
-    }
-    td {
-      padding: 0.65rem 0.75rem;
-      color: var(--s700);
-      border-bottom: 1px solid rgba(226,232,240,0.5);
-    }
+    thead th { background: var(--s100); color: var(--s500); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.055em; padding: 0.55rem 0.75rem; text-align: left; border-bottom: 1px solid var(--s200); }
+    td { padding: 0.65rem 0.75rem; color: var(--s700); border-bottom: 1px solid rgba(226,232,240,0.5); }
     tr:last-child td { border-bottom: none; }
     tbody tr:hover td { background: var(--s50); }
-
-    .status-pill {
-      display: inline-block;
-      padding: 0.22rem 0.6rem;
-      border-radius: 40px;
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
+    .status-pill { display: inline-block; padding: 0.22rem 0.6rem; border-radius: 40px; font-size: 0.7rem; font-weight: 600; }
     .status-New         { background: #EFF6FF; color: #2563EB; }
     .status-Contacted   { background: #FFF7ED; color: #C2410C; }
     .status-Negotiation { background: #FEF9C3; color: #A16207; }
     .status-Won         { background: #F0FDF4; color: #16A34A; }
     .status-Lost        { background: #FEF2F2; color: #DC2626; }
-
-    /* ── EMPTY STATE ────────────────────────────────────────── */
-    .empty {
-      text-align: center;
-      padding: 2.5rem 1rem;
-      color: var(--s400);
-    }
-    .empty-icon {
-      width: 44px; height: 44px;
-      border-radius: 12px;
-      background: var(--s100);
-      display: inline-flex; align-items: center; justify-content: center;
-      color: var(--s400);
-      margin-bottom: 0.75rem;
-    }
-    .empty p { font-size: 0.85rem; }
-
-    /* ── BADGE ──────────────────────────────────────────────── */
-    .prop-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      background: var(--g50);
-      color: var(--g700);
-      border: 1px solid rgba(30,107,74,0.18);
-      padding: 0.3rem 0.75rem;
-      border-radius: 40px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      margin: 0.2rem 0.3rem 0.2rem 0;
-    }
-
-    /* ── PROFILE ────────────────────────────────────────────── */
-    .profile-avatar-lg {
-      width: 60px; height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--g600), var(--g400));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--white);
-      flex-shrink: 0;
-    }
-    .info-row {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.65rem 0;
-      border-bottom: 1px solid var(--s200);
-      font-size: 0.875rem;
-    }
+    .empty { text-align: center; padding: 2.5rem 1rem; color: var(--s400); }
+    .empty-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--s100); display: inline-flex; align-items: center; justify-content: center; color: var(--s400); margin-bottom: 0.75rem; }
+    .prop-badge { display: inline-flex; align-items: center; gap: 0.3rem; background: var(--g50); color: var(--g700); border: 1px solid rgba(30,107,74,0.18); padding: 0.3rem 0.75rem; border-radius: 40px; font-size: 0.75rem; font-weight: 600; margin: 0.2rem 0.3rem 0.2rem 0; }
+    .profile-avatar-lg { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--g600), var(--g400)); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 700; color: var(--white); }
+    .info-row { display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0; border-bottom: 1px solid var(--s200); font-size: 0.875rem; }
     .info-row:last-child { border-bottom: none; }
     .info-row .ir-icon { color: var(--s400); flex-shrink: 0; }
-    .info-row .ir-label { font-size: 0.72rem; color: var(--s500); margin-bottom: 0.1rem; }
-    .info-row .ir-value { font-weight: 500; color: var(--s900); }
-
-    /* ── MOBILE OVERLAY ─────────────────────────────────────── */
-    .sidebar-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
-      z-index: 150;
-      backdrop-filter: blur(2px);
-    }
+    .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 150; backdrop-filter: blur(2px); }
     .sidebar-overlay.show { display: block; }
-
-    /* ── RESPONSIVE ─────────────────────────────────────────── */
-    @media (max-width: 768px) {
-      .sidebar {
-        transform: translateX(-100%);
-        width: var(--sidebar-full) !important;
-      }
-      .sidebar.mobile-open { transform: translateX(0); }
-      /* Force full labels visible when drawer is open on mobile */
-      .sidebar.mobile-open .sb-wordmark,
-      .sidebar.mobile-open .sb-section-label,
-      .sidebar.mobile-open .ni-label,
-      .sidebar.mobile-open .sb-user-meta,
-      .sidebar.mobile-open .lo-label { opacity: 1 !important; width: auto !important; pointer-events: auto !important; }
-      .sidebar.mobile-open .sb-toggle { display: none; }
-      .main { margin-left: 0 !important; }
-      #mobileMenuBtn { display: flex; }
-      .content { padding: 1rem; }
-    }
-
-    /* ── ACTION ROW ─────────────────────────────────────────── */
-    .action-row {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
+    @media (max-width: 768px) { .sidebar { transform: translateX(-100%); width: var(--sidebar-full) !important; } .sidebar.mobile-open { transform: translateX(0); } .sidebar.mobile-open .sb-wordmark, .sidebar.mobile-open .sb-section-label, .sidebar.mobile-open .ni-label, .sidebar.mobile-open .sb-user-meta, .sidebar.mobile-open .lo-label { opacity: 1 !important; width: auto !important; pointer-events: auto !important; } .sidebar.mobile-open .sb-toggle { display: none; } .main { margin-left: 0 !important; } #mobileMenuBtn { display: flex; } .content { padding: 1rem; } }
+    .action-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
     .action-row .btn { flex: 1; min-width: 140px; margin-top: 0.75rem; }
+    .refresh-btn { background: none; border: 1px solid var(--s200); border-radius: 30px; padding: 0.25rem 0.85rem; font-size: 0.7rem; cursor: pointer; margin-left: 0.5rem; display: inline-flex; align-items: center; gap: 4px; }
+    .refresh-btn:hover { background: var(--s100); }
   </style>
 </head>
 <body>
+<div id="loginSection"><div class="login-card"><div class="login-brand"><div class="login-brand-logo"><i data-lucide="building-2" style="color:white; width:26px; height:26px;"></i></div><h1>Staff Hub</h1><p>Sleepy Stays Operations</p></div><div class="form-field"><label>Email Address</label><div class="input-wrap"><span class="input-icon icon"><i data-lucide="mail" style="width:16px;height:16px;"></i></span><input type="email" id="loginEmail" placeholder="you@sleepystays.com" autocomplete="email"></div></div><div class="form-field"><label>Password</label><div class="input-wrap"><span class="input-icon icon"><i data-lucide="lock" style="width:16px;height:16px;"></i></span><input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password"></div></div><button class="btn btn-primary" id="loginBtn">Sign in</button><div id="loginError" class="login-error"></div></div></div>
 
-<!-- ══ LOGIN ══════════════════════════════════════════════════ -->
-<div id="loginSection">
-  <div class="login-card">
-    <div class="login-brand">
-      <div class="login-brand-logo">
-        <i data-lucide="building-2" style="color:white; width:26px; height:26px;"></i>
-      </div>
-      <h1>Staff Hub</h1>
-      <p>Sleepy Stays Operations</p>
-    </div>
-    <div class="form-field">
-      <label>Email Address</label>
-      <div class="input-wrap">
-        <span class="input-icon icon"><i data-lucide="mail" style="width:16px;height:16px;"></i></span>
-        <input type="email" id="loginEmail" placeholder="you@sleepystays.com" autocomplete="email">
-      </div>
-    </div>
-    <div class="form-field">
-      <label>Password</label>
-      <div class="input-wrap">
-        <span class="input-icon icon"><i data-lucide="lock" style="width:16px;height:16px;"></i></span>
-        <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
-      </div>
-    </div>
-    <button class="btn btn-primary" id="loginBtn">Sign in</button>
-    <div id="loginError" class="login-error"></div>
-  </div>
-</div>
-
-<!-- ══ APP SHELL ═══════════════════════════════════════════════ -->
-<div id="appSection">
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
-  <div class="app-shell">
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar mini" id="sidebar">
-      <div class="sb-header">
-        <div class="sb-logo">
-          <i data-lucide="building-2" style="color:white;width:18px;height:18px;"></i>
-        </div>
-        <div class="sb-wordmark">
-          <strong>Staff Hub</strong>
-          <span>Sleepy Stays</span>
-        </div>
-        <button class="sb-toggle" id="sidebarToggle" title="Toggle sidebar">
-          <i data-lucide="chevrons-left" id="toggleIcon" style="width:16px;height:16px;"></i>
-        </button>
-      </div>
-
-      <nav class="sb-nav">
-        <div class="sb-section">
-          <div class="sb-section-label">Operations</div>
-          <div class="nav-item active" data-page="attendance" id="nav-attendance">
-            <span class="ni-icon"><i data-lucide="clock" style="width:18px;height:18px;"></i></span>
-            <span class="ni-label">Attendance</span>
-          </div>
-          <div class="nav-item" data-page="eod" id="nav-eod">
-            <span class="ni-icon"><i data-lucide="clipboard-list" style="width:18px;height:18px;"></i></span>
-            <span class="ni-label">End of Day</span>
-          </div>
-          <div class="nav-item" data-page="guests" id="nav-guests">
-            <span class="ni-icon"><i data-lucide="users" style="width:18px;height:18px;"></i></span>
-            <span class="ni-label">Guests</span>
-          </div>
-        </div>
-        <div class="sb-section">
-          <div class="sb-section-label">Staff</div>
-          <div class="nav-item" data-page="helpers" id="nav-helpers">
-            <span class="ni-icon"><i data-lucide="hard-hat" style="width:18px;height:18px;"></i></span>
-            <span class="ni-label">Helpers Log</span>
-          </div>
-          <div class="nav-item" data-page="leads" id="nav-leads">
-            <span class="ni-icon"><i data-lucide="phone-call" style="width:18px;height:18px;"></i></span>
-            <span class="ni-label">Sales Leads</span>
-          </div>
-        </div>
-        <div class="sb-section">
-          <div class="sb-section-label">Account</div>
-          <div class="nav-item" data-page="profile" id="nav-profile">
-            <span class="ni-icon"><i data-lucide="user-circle" style="width:18px;height:18px;"></i></span>
-            <span class="ni-label">Profile</span>
-          </div>
-        </div>
-      </nav>
-
-      <div class="sb-footer">
-        <div class="sb-user">
-          <div class="sb-avatar" id="sbAvatar">?</div>
-          <div class="sb-user-meta">
-            <div class="sb-user-name" id="sbName">—</div>
-            <div class="sb-user-role" id="sbRole">—</div>
-          </div>
-        </div>
-        <button class="btn-logout" id="logoutBtn">
-          <span class="icon" style="flex-shrink:0"><i data-lucide="log-out" style="width:15px;height:15px;"></i></span>
-          <span class="lo-label">Sign out</span>
-        </button>
-      </div>
-    </aside>
-
-    <!-- MAIN -->
-    <div class="main mini" id="mainArea">
-      <header class="topbar">
-        <button id="mobileMenuBtn">
-          <i data-lucide="menu" style="width:22px;height:22px;"></i>
-        </button>
-        <div class="topbar-title" id="topbarTitle">Attendance</div>
-        <div class="team-chip" id="teamChip">
-          <i data-lucide="shield-check" style="width:12px;height:12px;"></i>
-          <span id="teamLabel">—</span>
-        </div>
-      </header>
-      <div class="content">
-        <div id="pageContent"></div>
-      </div>
-    </div>
-
-  </div>
-</div>
+<div id="appSection"><div class="sidebar-overlay" id="sidebarOverlay"></div><div class="app-shell"><aside class="sidebar mini" id="sidebar"><div class="sb-header"><div class="sb-logo"><i data-lucide="building-2" style="color:white;width:18px;height:18px;"></i></div><div class="sb-wordmark"><strong>Staff Hub</strong><span>Sleepy Stays</span></div><button class="sb-toggle" id="sidebarToggle"><i data-lucide="chevrons-left" id="toggleIcon" style="width:16px;height:16px;"></i></button></div><nav class="sb-nav"><div class="sb-section"><div class="sb-section-label">Operations</div><div class="nav-item active" data-page="attendance"><span class="ni-icon"><i data-lucide="clock" style="width:18px;height:18px;"></i></span><span class="ni-label">Attendance</span></div><div class="nav-item" data-page="eod"><span class="ni-icon"><i data-lucide="clipboard-list" style="width:18px;height:18px;"></i></span><span class="ni-label">End of Day</span></div><div class="nav-item" data-page="guests"><span class="ni-icon"><i data-lucide="users" style="width:18px;height:18px;"></i></span><span class="ni-label">Guests</span></div></div><div class="sb-section"><div class="sb-section-label">Staff</div><div class="nav-item" data-page="helpers"><span class="ni-icon"><i data-lucide="hard-hat" style="width:18px;height:18px;"></i></span><span class="ni-label">Helpers Log</span></div><div class="nav-item" data-page="leads"><span class="ni-icon"><i data-lucide="phone-call" style="width:18px;height:18px;"></i></span><span class="ni-label">Sales Leads</span></div></div><div class="sb-section"><div class="sb-section-label">Account</div><div class="nav-item" data-page="profile"><span class="ni-icon"><i data-lucide="user-circle" style="width:18px;height:18px;"></i></span><span class="ni-label">Profile</span></div></div><div class="sb-section" id="adminSection" style="display: none;"><div class="sb-section-label">Admin</div><div class="nav-item" data-page="admin"><span class="ni-icon"><i data-lucide="shield" style="width:18px;height:18px;"></i></span><span class="ni-label">Admin Panel</span></div></div></nav><div class="sb-footer"><div class="sb-user"><div class="sb-avatar" id="sbAvatar">?</div><div class="sb-user-meta"><div class="sb-user-name" id="sbName">—</div><div class="sb-user-role" id="sbRole">—</div></div></div><button class="btn-logout" id="logoutBtn"><span class="icon" style="flex-shrink:0"><i data-lucide="log-out" style="width:15px;height:15px;"></i></span><span class="lo-label">Sign out</span></button></div></aside><div class="main mini" id="mainArea"><header class="topbar"><button id="mobileMenuBtn"><i data-lucide="menu" style="width:22px;height:22px;"></i></button><div class="topbar-title" id="topbarTitle">Attendance</div><div class="team-chip"><i data-lucide="shield-check" style="width:12px;height:12px;"></i><span id="teamLabel">—</span></div></header><div class="content" id="pageContent"></div></div></div></div>
 
 <script>
-// ── CONFIGURATION ──────────────────────────────────────────────
-const API_BASE = 'https://script.google.com/macros/s/AKfycby8qV5LS6ZFeHwwCKOPoOXU33EDgSL1oqdgkpD5UNbp9oNtuSH1iGspWdH-bCGB3xOApQ/exec';
+const API_BASE = 'https://script.google.com/macros/s/AKfycbyGuBunO3ciX9vIuJYGK2YeQu1FE-eHgk1roPhxcZxahHs6O0IRVPAH6KP78BVycxOBDg/exec';
+let currentUser = null, currentPage = 'attendance', sidebarMini = true;
+let appData = { selectedProperty: '', attendanceAction: 'CheckIn', attendanceDateTime: new Date().toISOString().slice(0,16), attendanceNotes: '', eodProperty: '', eodDate: new Date().toISOString().slice(0,10), eodSales: '', eodOccupancy: '', eodMaintenance: '', eodNotes: '', guestCheckIn: { name:'', property:'', datetime:'', room:'' }, guestCheckOut: { name:'', property:'', datetime:'', amount:'', notes:'' }, openCheckIns: [], helperName: '', helperProperty: '', helperDate: new Date().toISOString().slice(0,10), helperNotes: '', recentHelpers: [], lead: { name:'', contact:'', callsMade:0, status:'New', notes:'', property:'' }, myLeads: [], allLeads: [] };
+let adminStaff = [], adminAttendanceLogs = [], adminEODs = [], adminGuests = [], adminHelpers = [], adminLeads = [];
 
-// ── GLOBAL STATE ───────────────────────────────────────────────
-let currentUser = null;
-let currentPage = 'attendance';
-let sidebarMini = true;
-let appData = {
-  selectedProperty: '',
-  attendanceAction: 'CheckIn',
-  attendanceDateTime: new Date().toISOString().slice(0,16),
-  attendanceNotes: '',
-  eodProperty: '',
-  eodDate: new Date().toISOString().slice(0,10),
-  eodSales: '',
-  eodOccupancy: '',
-  eodMaintenance: '',
-  eodNotes: '',
-  guestCheckIn:  { name:'', property:'', datetime:'', room:'' },
-  guestCheckOut: { name:'', property:'', datetime:'', amount:'', notes:'' },
-  openCheckIns: [],
-  helperName: '',
-  helperProperty: '',
-  helperDate: new Date().toISOString().slice(0,10),
-  helperNotes: '',
-  recentHelpers: [],
-  lead: { name:'', contact:'', callsMade:0, status:'New', notes:'', property:'' },
-  myLeads: [],
-  allLeads: []
-};
-
-// ── PAGE TITLES ────────────────────────────────────────────────
-const PAGE_META = {
-  attendance: { title: 'Attendance',      subtitle: 'Record your check-in and check-out' },
-  eod:        { title: 'End of Day',       subtitle: 'Submit your daily property report' },
-  guests:     { title: 'Guest Management', subtitle: 'Manage guest check-ins and check-outs' },
-  helpers:    { title: 'Helpers Log',      subtitle: 'Track temporary staff activity' },
-  leads:      { title: 'Sales Leads',      subtitle: 'Manage your sales pipeline' },
-  profile:    { title: 'Profile',          subtitle: 'Your account details' }
-};
-
-// ── HELPERS ────────────────────────────────────────────────────
+const PAGE_META = { attendance: { title: 'Attendance', subtitle: 'Record your check-in and check-out' }, eod: { title: 'End of Day', subtitle: 'Submit your daily property report' }, guests: { title: 'Guest Management', subtitle: 'Manage guest check-ins and check-outs' }, helpers: { title: 'Helpers Log', subtitle: 'Track temporary staff activity' }, leads: { title: 'Sales Leads', subtitle: 'Manage your sales pipeline' }, profile: { title: 'Profile', subtitle: 'Your account details' }, admin: { title: 'Admin Panel', subtitle: 'Complete staff & operations overview' } };
 function qs(id) { return document.getElementById(id); }
+function showToast(id, msg, ok) { const el = qs(id); if(!el) return; el.innerHTML = `<i data-lucide="${ok ? 'check-circle' : 'alert-circle'}" style="width:14px;height:14px;"></i> ${msg}`; el.className = `toast show ${ok ? 'success' : 'error'}`; lucide.createIcons({ nodes: [el] }); setTimeout(() => { el.className = 'toast'; }, 4000); }
+async function apiCall(action, params = {}) { const url = new URL(API_BASE); url.searchParams.append('action', action); Object.entries(params).forEach(([k,v]) => url.searchParams.append(k, v)); const res = await fetch(url.toString()); return res.json(); }
+function propOptions(selected) { return currentUser.assignedProperties.map(p => `<option ${p === selected ? 'selected' : ''}>${p}</option>`).join(''); }
+async function loadHelpers() { try { const d = await apiCall('getHelpers', { managerEmail: currentUser.email }); appData.recentHelpers = d.success ? d.data : []; } catch(e) { appData.recentHelpers = []; } }
+async function loadOpenCheckIns() { try { const d = await apiCall('getOpenCheckIns', { property: appData.guestCheckOut.property || '' }); appData.openCheckIns = d.success ? d.data : []; } catch(e) { appData.openCheckIns = []; } }
+async function loadMyLeads() { try { const d = await apiCall('getLeads', { staffEmail: currentUser.email, team: 'Sales' }); appData.myLeads = d.success ? d.data : []; } catch(e) { appData.myLeads = []; } }
+async function loadAllLeads() { try { const d = await apiCall('getLeads', { staffEmail: currentUser.email, team: 'Management' }); appData.allLeads = d.success ? d.data : []; } catch(e) { appData.allLeads = []; } }
 
-function showToast(id, msg, ok) {
-  const el = qs(id);
-  if (!el) return;
-  el.innerHTML = `<i data-lucide="${ok ? 'check-circle' : 'alert-circle'}" style="width:14px;height:14px;"></i> ${msg}`;
-  el.className = `toast show ${ok ? 'success' : 'error'}`;
-  lucide.createIcons({ nodes: [el] });
-  setTimeout(() => { el.className = 'toast'; }, 4000);
+// ---- ADMIN FETCH ----
+async function fetchAdminStaff() { try { const d = await apiCall('getAllEmployees', {}); adminStaff = d.success ? d.data : []; } catch(e){ adminStaff = []; } }
+async function fetchAdminAttendance() { try { const d = await apiCall('getAllAttendanceLogs', {}); adminAttendanceLogs = d.success ? d.data : []; } catch(e){ adminAttendanceLogs = []; } }
+async function fetchAdminEODs() { try { const d = await apiCall('getAllEODReports', {}); adminEODs = d.success ? d.data : []; } catch(e){ adminEODs = []; } }
+async function fetchAdminGuests() { try { const d = await apiCall('getAllGuestRecords', {}); adminGuests = d.success ? d.data : []; } catch(e){ adminGuests = []; } }
+async function fetchAdminHelpers() { try { const d = await apiCall('getAllHelpers', {}); adminHelpers = d.success ? d.data : []; } catch(e){ adminHelpers = []; } }
+async function fetchAdminLeads() { try { const d = await apiCall('getAllLeads', {}); adminLeads = d.success ? d.data : []; } catch(e){ adminLeads = []; } }
+async function refreshAllAdminData() { await Promise.all([fetchAdminStaff(), fetchAdminAttendance(), fetchAdminEODs(), fetchAdminGuests(), fetchAdminHelpers(), fetchAdminLeads()]); renderAdminTables(); }
+function renderAdminTables() {
+  if(currentPage !== 'admin') return;
+  const staffDiv = qs('adminStaffTable'); if(staffDiv) staffDiv.innerHTML = adminStaff.length ? `<div class="table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Team</th><th>Role</th><th>Properties</th><th>Status</th></tr></thead><tbody>${adminStaff.map(s=>`<tr><td>${s.Name||'—'}</td><td>${s.Email||'—'}</td><td>${s.Team||'—'}</td><td>${s.Role||'—'}</td><td>${(s.AssignedProperties||'').substring(0,40)}</td><td><span class="status-pill" style="background:${s.Status==='active'?'#F0FDF4':'#FEF2F2'};color:${s.Status==='active'?'#16A34A':'#DC2626'}">${s.Status||'—'}</span></td></tr>`).join('')}</tbody></table></div>` : `<div class="empty"><div class="empty-icon"><i data-lucide="users"></i></div><p>No staff records found</p></div>`;
+  const attDiv = qs('adminAttendanceTable'); if(attDiv) attDiv.innerHTML = adminAttendanceLogs.length ? `<div class="table-wrap"><table><thead><tr><th>Timestamp</th><th>Staff</th><th>Property</th><th>Action</th><th>Notes</th></tr></thead><tbody>${adminAttendanceLogs.slice(0,60).map(a=>`<tr><td>${a.Datetime||'—'}</td><td>${a.Email?.split('@')[0]||'—'}</td><td>${a.Property||'—'}</td><td><span class="status-pill" style="background:#EFF6FF">${a.Action||'—'}</span></td><td>${(a.Notes||'').substring(0,40)}</td></tr>`).join('')}</tbody></table></div>` : `<div class="empty"><div class="empty-icon"><i data-lucide="clock"></i></div><p>No attendance logs</p></div>`;
+  const eodDiv = qs('adminEodTable'); if(eodDiv) eodDiv.innerHTML = adminEODs.length ? `<div class="table-wrap"><table><thead><tr><th>Date</th><th>Property</th><th>Staff</th><th>Sales (₹)</th><th>Occupancy %</th><th>Maintenance</th></tr></thead><tbody>${adminEODs.slice(0,40).map(r=>`<tr><td>${r.Date||'—'}</td><td>${r.Property||'—'}</td><td>${r.StaffEmail?.split('@')[0]||'—'}</td><td>${r.Sales||0}</td><td>${r.Occupancy||'—'}</td><td>${(r.Maintenance||'').substring(0,35)}</td></tr>`).join('')}</tbody></table></div>` : `<div class="empty"><div class="empty-icon"><i data-lucide="clipboard-list"></i></div><p>No EOD reports</p></div>`;
+  const guestDiv = qs('adminGuestsTable'); if(guestDiv) guestDiv.innerHTML = adminGuests.length ? `<div class="table-wrap"><table><thead><tr><th>Timestamp</th><th>Guest</th><th>Property</th><th>Type</th><th>Room/Amount</th></tr></thead><tbody>${adminGuests.slice(0,50).map(g=>`<tr><td>${g.Timestamp||'—'}</td><td>${g.GuestName||'—'}</td><td>${g.Property||'—'}</td><td>${g.Type||'Check-in'}</td><td>${g.RoomNo||g.AmountPaid||'—'}</td></tr>`).join('')}</tbody></table></div>` : `<div class="empty"><div class="empty-icon"><i data-lucide="hotel"></i></div><p>No guest records</p></div>`;
+  const helperDiv = qs('adminHelpersTable'); if(helperDiv) helperDiv.innerHTML = adminHelpers.length ? `<div class="table-wrap"><table><thead><tr><th>Date</th><th>Helper</th><th>Property</th><th>Logged By</th><th>Notes</th></tr></thead><tbody>${adminHelpers.slice(0,40).map(h=>`<tr><td>${h.WorkDate||'—'}</td><td>${h.HelperName||'—'}</td><td>${h.Property||'—'}</td><td>${(h.ManagerEmail||'').split('@')[0]||'—'}</td><td>${(h.Notes||'').substring(0,35)}</td></tr>`).join('')}</tbody></table></div>` : `<div class="empty"><div class="empty-icon"><i data-lucide="hard-hat"></i></div><p>No helper logs</p></div>`;
+  const leadDiv = qs('adminLeadsTable'); if(leadDiv) leadDiv.innerHTML = adminLeads.length ? `<div class="table-wrap"><table><thead><tr><th>Date</th><th>Lead</th><th>Property</th><th>Staff</th><th>Status</th><th>Calls</th></tr></thead><tbody>${adminLeads.slice(0,50).map(l=>`<tr><td>${l.Timestamp?.slice(0,10)||'—'}</td><td>${l.LeadName||'—'}</td><td>${l.Property||'—'}</td><td>${(l.StaffEmail||'').split('@')[0]||'—'}</td><td><span class="status-pill status-${l.Status}">${l.Status||'New'}</span></td><td>${l.CallsMade||0}</td></tr>`).join('')}</tbody></table></div>` : `<div class="empty"><div class="empty-icon"><i data-lucide="phone-call"></i></div><p>No sales leads</p></div>`;
+  lucide.createIcons();
 }
+function renderAdminPage() { return `<div class="page-section"><div class="page-hd"><h2>Admin Panel</h2><p>Complete staff & operations overview</p></div><div style="margin-bottom:1rem;text-align:right"><button class="refresh-btn" id="globalRefreshAdmin"><i data-lucide="refresh-cw" style="width:12px;"></i> Refresh all data</button></div><div class="card"><div class="card-hd"><div class="card-hd-icon"><i data-lucide="users"></i></div><h3>Staff Directory</h3></div><div id="adminStaffTable"><div class="empty">Loading staff...</div></div></div><div class="card"><div class="card-hd"><div class="card-hd-icon"><i data-lucide="clock"></i></div><h3>Attendance Logs (All Staff)</h3></div><div id="adminAttendanceTable"><div class="empty">Loading attendance...</div></div></div><div class="card"><div class="card-hd"><div class="card-hd-icon"><i data-lucide="clipboard-list"></i></div><h3>End of Day Reports</h3></div><div id="adminEodTable"><div class="empty">Loading EODs...</div></div></div><div class="card"><div class="card-hd"><div class="card-hd-icon"><i data-lucide="hotel"></i></div><h3>Guest Activity (Check-ins/Outs)</h3></div><div id="adminGuestsTable"><div class="empty">Loading guests...</div></div></div><div class="card"><div class="card-hd"><div class="card-hd-icon"><i data-lucide="hard-hat"></i></div><h3>Helpers Log</h3></div><div id="adminHelpersTable"><div class="empty">Loading helpers...</div></div></div><div class="card"><div class="card-hd"><div class="card-hd-icon"><i data-lucide="phone-call"></i></div><h3>Sales Leads (All)</h3></div><div id="adminLeadsTable"><div class="empty">Loading leads...</div></div></div></div>`; }
+async function initAdminPage() { await refreshAllAdminData(); const refreshBtn = qs('globalRefreshAdmin'); if(refreshBtn) refreshBtn.onclick = () => { refreshAllAdminData(); showToast('adminMsg','Refreshing admin data...',true); }; }
 
-async function apiCall(action, params = {}) {
-  const url = new URL(API_BASE);
-  url.searchParams.append('action', action);
-  Object.entries(params).forEach(([k,v]) => url.searchParams.append(k, v));
-  const res = await fetch(url.toString());
-  return res.json();
-}
+// ---- Standard page rendering (kept original) ----
+function renderAttendance() { return `<div class="card" style="max-width:520px"><div class="card-hd"><div class="card-hd-icon"><i data-lucide="scan-line"></i></div><h3>Record Attendance</h3></div><label>Property</label><select id="attProperty">${propOptions(appData.selectedProperty)}</select><label>Action</label><select id="attAction"><option ${appData.attendanceAction==='CheckIn'?'selected':''} value="CheckIn">Check In</option><option ${appData.attendanceAction==='CheckOut'?'selected':''} value="CheckOut">Check Out</option></select><label>Date & Time</label><input type="datetime-local" id="attDateTime" value="${appData.attendanceDateTime}"><label>Notes (optional)</label><textarea id="attNotes" placeholder="Add any notes…">${appData.attendanceNotes}</textarea><div class="action-row"><button class="btn btn-primary" id="submitAttendance"><i data-lucide="check"></i> Record</button><button class="btn btn-whatsapp" id="shareAttendance"><i data-lucide="message-circle"></i> WhatsApp</button></div><div id="attMsg" class="toast"></div></div>`; }
+function renderEOD() { return `<div class="card"><div class="card-hd"><div class="card-hd-icon"><i data-lucide="clipboard-list"></i></div><h3>Daily Report</h3></div><div class="grid-2"><div><label>Property</label><select id="eodProperty">${propOptions(appData.eodProperty)}</select><label>Report Date</label><input type="date" id="eodDate" value="${appData.eodDate}"><label>Sales Amount (₹)</label><input type="number" id="eodSales" value="${appData.eodSales}" placeholder="0"><label>Occupancy (%)</label><input type="text" id="eodOccupancy" value="${appData.eodOccupancy}" placeholder="e.g. 85"></div><div><label>Maintenance Tasks Completed</label><textarea id="eodMaintenance" rows="3" placeholder="Describe completed maintenance…">${appData.eodMaintenance}</textarea><label>Additional Notes</label><textarea id="eodNotes" rows="3" placeholder="Any other notes…">${appData.eodNotes}</textarea></div></div><div class="action-row"><button class="btn btn-primary" id="submitEOD"><i data-lucide="send"></i> Submit Report</button><button class="btn btn-whatsapp" id="shareEOD"><i data-lucide="message-circle"></i> WhatsApp</button></div><div id="eodMsg" class="toast"></div></div>`; }
+function renderGuests() { return `<div class="grid-2"><div class="card"><div class="card-hd"><div class="card-hd-icon"><i data-lucide="log-in"></i></div><h3>Check In</h3></div><label>Guest Name</label><input type="text" id="guestInName" placeholder="Full name" value="${appData.guestCheckIn.name}"><label>Property</label><select id="guestInProperty">${propOptions(appData.guestCheckIn.property)}</select><label>Check-in Date & Time</label><input type="datetime-local" id="guestInDateTime" value="${appData.guestCheckIn.datetime}"><label>Room / Unit</label><input type="text" id="guestInRoom" placeholder="e.g. 101" value="${appData.guestCheckIn.room}"><button class="btn btn-primary" id="doGuestCheckIn" style="margin-top:1rem;width:100%"><i data-lucide="log-in"></i> Check In Guest</button></div><div class="card"><div class="card-hd"><div class="card-hd-icon"><i data-lucide="log-out"></i></div><h3>Check Out</h3></div><label>Guest Name</label><input type="text" id="guestOutName" placeholder="Start typing…" value="${appData.guestCheckOut.name}" list="openGuestsList"><datalist id="openGuestsList">${appData.openCheckIns.map(g=>`<option value="${g.GuestName}"></option>`).join('')}</datalist><label>Property</label><select id="guestOutProperty">${propOptions(appData.guestCheckOut.property)}</select><label>Check-out Date & Time</label><input type="datetime-local" id="guestOutDateTime" value="${appData.guestCheckOut.datetime}"><label>Amount Paid (₹)</label><input type="number" id="guestOutAmount" value="${appData.guestCheckOut.amount}" placeholder="0"><label>Notes</label><textarea id="guestOutNotes" rows="2" placeholder="Payment method, remarks…">${appData.guestCheckOut.notes}</textarea><button class="btn btn-primary" id="doGuestCheckOut" style="margin-top:1rem;width:100%"><i data-lucide="log-out"></i> Check Out & Record</button></div></div><div id="guestMsg" class="toast"></div>`; }
+function renderHelpers() { const rows = appData.recentHelpers.slice(0,8); return `<div class="card" style="max-width:640px;margin-bottom:1.25rem"><div class="card-hd"><div class="card-hd-icon"><i data-lucide="hard-hat"></i></div><h3>Log a Helper</h3></div><div class="grid-2"><div><label>Helper Name</label><input type="text" id="helperName" value="${appData.helperName}" placeholder="e.g. Raju"><label>Property</label><select id="helperProperty">${propOptions(appData.helperProperty)}</select></div><div><label>Work Date</label><input type="date" id="helperDate" value="${appData.helperDate}"><label>Notes</label><textarea id="helperNotes" rows="2" placeholder="What they helped with…">${appData.helperNotes}</textarea></div></div><button class="btn btn-primary" id="addHelper" style="margin-top:1rem;width:100%"><i data-lucide="plus"></i> Log Helper</button><div id="helperMsg" class="toast"></div></div><div class="card"><div class="card-hd"><div class="card-hd-icon"><i data-lucide="list"></i></div><h3>Recent Helpers</h3></div><div class="table-wrap">${rows.length ? `<table><thead><tr><th>Date</th><th>Name</th><th>Property</th><th>Notes</th></tr></thead><tbody>${rows.map(h=>`<tr><td>${h.WorkDate}</td><td>${h.HelperName}</td><td>${h.Property}</td><td>${h.Notes||'—'}</td></tr>`).join('')}</tbody></table>` : `<div class="empty"><div class="empty-icon"><i data-lucide="users"></i></div><p>No helpers logged yet</p></div>`}</div></div>`; }
+function renderLeads() { const leads = currentUser.team === 'Sales' ? appData.myLeads : appData.allLeads; return `<div class="card"><div class="card-hd"><div class="card-hd-icon"><i data-lucide="plus-circle"></i></div><h3>Add Lead</h3></div><div class="grid-2"><div><label>Lead Name *</label><input type="text" id="leadName" value="${appData.lead.name}" placeholder="Full name"><label>Property *</label><select id="leadProperty">${propOptions(appData.lead.property)}</select><label>Contact</label><input type="text" id="leadContact" value="${appData.lead.contact}" placeholder="Phone or email"></div><div><label>Calls Made</label><input type="number" id="leadCalls" value="${appData.lead.callsMade}" min="0"><label>Status</label><select id="leadStatus">${['New','Contacted','Negotiation','Won','Lost'].map(s=>`<option ${appData.lead.status===s?'selected':''}>${s}</option>`).join('')}</select><label>Notes</label><textarea id="leadNotes" rows="2" placeholder="Interests, follow-up…">${appData.lead.notes}</textarea></div></div><div class="action-row"><button class="btn btn-primary" id="addLead"><i data-lucide="plus"></i> Add Lead</button><button class="btn btn-whatsapp" id="shareLead"><i data-lucide="message-circle"></i> WhatsApp</button></div><div id="leadMsg" class="toast"></div></div><div class="card"><div class="card-hd"><div class="card-hd-icon"><i data-lucide="bar-chart-2"></i></div><h3>${currentUser.team==='Sales'?'My Recent Leads':'All Sales Leads'}</h3></div><div class="table-wrap">${leads.length ? `<table><thead><tr>${currentUser.team!=='Sales'?'<th>Staff</th>':''}<th>Date</th><th>Lead</th><th>Property</th><th>Calls</th><th>Status</th><th>Notes</th></tr></thead><tbody>${leads.slice(0,15).map(l=>`<tr>${currentUser.team!=='Sales'?`<td>${l.StaffEmail?.split('@')[0]||'—'}</td>`:''}<td>${l.Timestamp?.slice(0,10)||'—'}</td><td>${l.LeadName}</td><td>${l.Property}</td><td>${l.CallsMade}</td><td><span class="status-pill status-${l.Status}">${l.Status}</span></td><td>${l.Notes||'—'}</td></tr>`).join('')}</tbody></table>` : `<div class="empty"><div class="empty-icon"><i data-lucide="phone-call"></i></div><p>No leads found</p></div>`}</div></div>`; }
+function renderProfile() { const initials = currentUser.name ? currentUser.name[0].toUpperCase() : '?'; return `<div class="card" style="max-width:480px"><div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem"><div class="profile-avatar-lg">${initials}</div><div><div style="font-size:1.1rem;font-weight:700;color:var(--s900);letter-spacing:-0.02em">${currentUser.name}</div><div style="font-size:0.82rem;color:var(--s500);margin-top:0.2rem">${currentUser.team} · ${currentUser.role}</div></div></div><div class="divider"></div><div class="info-row"><span class="ir-icon"><i data-lucide="phone"></i></span><div><div class="ir-label">Phone</div><div class="ir-value">${currentUser.phone||'—'}</div></div></div><div class="info-row"><span class="ir-icon"><i data-lucide="users-2"></i></span><div><div class="ir-label">Team</div><div class="ir-value">${currentUser.team}</div></div></div><div class="info-row"><span class="ir-icon"><i data-lucide="badge-check"></i></span><div><div class="ir-label">Role</div><div class="ir-value">${currentUser.role}</div></div></div><div class="divider"></div><div style="font-size:0.72rem;font-weight:600;color:var(--s500);text-transform:uppercase;letter-spacing:0.055em;margin-bottom:0.65rem">Assigned Properties</div><div>${currentUser.assignedProperties.map(p=>`<span class="prop-badge"><i data-lucide="building" style="width:12px;height:12px;"></i> ${p}</span>`).join('')}</div></div>`; }
 
-function propOptions(selected) {
-  return currentUser.assignedProperties.map(p =>
-    `<option ${p === selected ? 'selected' : ''}>${p}</option>`
-  ).join('');
-}
+function attachPageEvents() { if (currentPage === 'attendance') { qs('submitAttendance')?.addEventListener('click', submitAttendance); qs('shareAttendance')?.addEventListener('click', shareAttendanceWhatsApp); qs('attProperty')?.addEventListener('change', e => appData.selectedProperty = e.target.value); qs('attAction')?.addEventListener('change', e => appData.attendanceAction = e.target.value); qs('attDateTime')?.addEventListener('change', e => appData.attendanceDateTime = e.target.value); qs('attNotes')?.addEventListener('input', e => appData.attendanceNotes = e.target.value); } else if (currentPage === 'eod') { qs('submitEOD')?.addEventListener('click', submitEOD); qs('shareEOD')?.addEventListener('click', shareEODWhatsApp); qs('eodProperty')?.addEventListener('change', e => appData.eodProperty = e.target.value); qs('eodDate')?.addEventListener('change', e => appData.eodDate = e.target.value); qs('eodSales')?.addEventListener('input', e => appData.eodSales = e.target.value); qs('eodOccupancy')?.addEventListener('input', e => appData.eodOccupancy = e.target.value); qs('eodMaintenance')?.addEventListener('input', e => appData.eodMaintenance = e.target.value); qs('eodNotes')?.addEventListener('input', e => appData.eodNotes = e.target.value); } else if (currentPage === 'guests') { qs('doGuestCheckIn')?.addEventListener('click', doGuestCheckIn); qs('doGuestCheckOut')?.addEventListener('click', doGuestCheckOut); qs('guestInName')?.addEventListener('input', e => appData.guestCheckIn.name = e.target.value); qs('guestInProperty')?.addEventListener('change', e => appData.guestCheckIn.property = e.target.value); qs('guestInDateTime')?.addEventListener('change', e => appData.guestCheckIn.datetime = e.target.value); qs('guestInRoom')?.addEventListener('input', e => appData.guestCheckIn.room = e.target.value); qs('guestOutName')?.addEventListener('input', e => appData.guestCheckOut.name = e.target.value); qs('guestOutProperty')?.addEventListener('change', e => appData.guestCheckOut.property = e.target.value); qs('guestOutDateTime')?.addEventListener('change', e => appData.guestCheckOut.datetime = e.target.value); qs('guestOutAmount')?.addEventListener('input', e => appData.guestCheckOut.amount = e.target.value); qs('guestOutNotes')?.addEventListener('input', e => appData.guestCheckOut.notes = e.target.value); } else if (currentPage === 'helpers') { qs('addHelper')?.addEventListener('click', addHelper); qs('helperName')?.addEventListener('input', e => appData.helperName = e.target.value); qs('helperProperty')?.addEventListener('change', e => appData.helperProperty = e.target.value); qs('helperDate')?.addEventListener('change', e => appData.helperDate = e.target.value); qs('helperNotes')?.addEventListener('input', e => appData.helperNotes = e.target.value); } else if (currentPage === 'leads') { qs('addLead')?.addEventListener('click', addLead); qs('shareLead')?.addEventListener('click', shareLeadWhatsApp); qs('leadName')?.addEventListener('input', e => appData.lead.name = e.target.value); qs('leadProperty')?.addEventListener('change', e => appData.lead.property = e.target.value); qs('leadContact')?.addEventListener('input', e => appData.lead.contact = e.target.value); qs('leadCalls')?.addEventListener('input', e => appData.lead.callsMade = parseInt(e.target.value)||0); qs('leadStatus')?.addEventListener('change', e => appData.lead.status = e.target.value); qs('leadNotes')?.addEventListener('input', e => appData.lead.notes = e.target.value); } else if (currentPage === 'admin') { initAdminPage(); } }
 
-// ── DATA LOADING ───────────────────────────────────────────────
-async function loadHelpers() {
-  try {
-    const d = await apiCall('getHelpers', { managerEmail: currentUser.email });
-    appData.recentHelpers = d.success ? d.data : [];
-  } catch(e) { appData.recentHelpers = []; }
-}
-async function loadOpenCheckIns() {
-  try {
-    const d = await apiCall('getOpenCheckIns', { property: appData.guestCheckOut.property || '' });
-    appData.openCheckIns = d.success ? d.data : [];
-  } catch(e) { appData.openCheckIns = []; }
-}
-async function loadMyLeads() {
-  try {
-    const d = await apiCall('getLeads', { staffEmail: currentUser.email, team: 'Sales' });
-    appData.myLeads = d.success ? d.data : [];
-  } catch(e) { appData.myLeads = []; }
-}
-async function loadAllLeads() {
-  try {
-    const d = await apiCall('getLeads', { staffEmail: currentUser.email, team: 'Management' });
-    appData.allLeads = d.success ? d.data : [];
-  } catch(e) { appData.allLeads = []; }
-}
+function renderPage() { const pc = qs('pageContent'); const renders = { attendance: renderAttendance, eod: renderEOD, guests: renderGuests, helpers: renderHelpers, leads: renderLeads, profile: renderProfile, admin: renderAdminPage }; pc.innerHTML = `<div class="page-section"><div class="page-hd"><h2>${PAGE_META[currentPage].title}</h2><p>${PAGE_META[currentPage].subtitle}</p></div>${(renders[currentPage]||(() => '<div class="card">Page not found</div>'))()}</div>`; lucide.createIcons({ nodes: [pc] }); attachPageEvents(); }
+function navigateTo(page) { currentPage = page; document.querySelectorAll('.nav-item').forEach(el => { el.classList.toggle('active', el.dataset.page === page); }); qs('topbarTitle').textContent = PAGE_META[page].title; qs('sidebar').classList.remove('mobile-open'); qs('sidebarOverlay').classList.remove('show'); renderPage(); }
 
-// ── PAGE RENDERS ───────────────────────────────────────────────
-function renderAttendance() {
-  return `
-  <div class="card" style="max-width:520px">
-    <div class="card-hd">
-      <div class="card-hd-icon"><i data-lucide="scan-line" style="width:18px;height:18px;"></i></div>
-      <h3>Record Attendance</h3>
-    </div>
-    <label>Property</label>
-    <select id="attProperty">${propOptions(appData.selectedProperty)}</select>
-    <label>Action</label>
-    <select id="attAction">
-      <option ${appData.attendanceAction==='CheckIn'?'selected':''} value="CheckIn">Check In</option>
-      <option ${appData.attendanceAction==='CheckOut'?'selected':''} value="CheckOut">Check Out</option>
-    </select>
-    <label>Date & Time</label>
-    <input type="datetime-local" id="attDateTime" value="${appData.attendanceDateTime}">
-    <label>Notes (optional)</label>
-    <textarea id="attNotes" placeholder="Add any notes…">${appData.attendanceNotes}</textarea>
-    <div class="action-row">
-      <button class="btn btn-primary" id="submitAttendance">
-        <i data-lucide="check" style="width:16px;height:16px;"></i> Record
-      </button>
-      <button class="btn btn-whatsapp" id="shareAttendance">
-        <i data-lucide="message-circle" style="width:16px;height:16px;"></i> WhatsApp
-      </button>
-    </div>
-    <div id="attMsg" class="toast"></div>
-  </div>`;
-}
+// ---- Existing CRUD operations (unchanged) ----
+async function submitAttendance() { /* same as original */ const property = qs('attProperty')?.value || appData.selectedProperty; const action = qs('attAction')?.value || appData.attendanceAction; const datetime = qs('attDateTime')?.value || appData.attendanceDateTime; const notes = qs('attNotes')?.value || appData.attendanceNotes; if (!property || !datetime) { showToast('attMsg','Property and date/time required',false); return; } const btn = qs('submitAttendance'); btn.disabled = true; try { const d = await apiCall('checkInOut', { email: currentUser.email, property, action, datetime, notes }); if (d.success) { showToast('attMsg', `${action} recorded successfully`, true); if (d.whatsappLink) window.open(d.whatsappLink, '_blank'); Object.assign(appData, { selectedProperty: property, attendanceAction: action, attendanceDateTime: datetime, attendanceNotes: notes }); } else showToast('attMsg', 'Failed to record attendance', false); } catch(e) { showToast('attMsg','Network error',false); } btn.disabled = false; }
+async function submitEOD() { const property = qs('eodProperty')?.value || appData.eodProperty; const date = qs('eodDate')?.value || appData.eodDate; const sales = qs('eodSales')?.value || appData.eodSales; const occupancy = qs('eodOccupancy')?.value || appData.eodOccupancy; const maintenance = qs('eodMaintenance')?.value || appData.eodMaintenance; const notes = qs('eodNotes')?.value || appData.eodNotes; if (!property || !date) { showToast('eodMsg','Property and date required',false); return; } const btn = qs('submitEOD'); btn.disabled = true; try { const d = await apiCall('submitEOD', { email: currentUser.email, property, date, sales: sales||0, occupancy, notes, maintenance }); if (d.success) { showToast('eodMsg','EOD report submitted',true); if (d.whatsappLink) window.open(d.whatsappLink, '_blank'); Object.assign(appData, { eodSales:'', eodOccupancy:'', eodMaintenance:'', eodNotes:'' }); ['eodSales','eodOccupancy','eodMaintenance','eodNotes'].forEach(id => { if(qs(id)) qs(id).value = ''; }); } else showToast('eodMsg','Failed to submit report',false); } catch(e) { showToast('eodMsg','Network error',false); } btn.disabled = false; }
+async function doGuestCheckIn() { const name = qs('guestInName')?.value, property = qs('guestInProperty')?.value, datetime = qs('guestInDateTime')?.value, room = qs('guestInRoom')?.value; if (!name||!property||!datetime) { showToast('guestMsg','Name, property and date/time required',false); return; } const btn = qs('doGuestCheckIn'); btn.disabled = true; try { const d = await apiCall('guestCheckIn', { staffEmail: currentUser.email, guestName: name, property, checkinDateTime: datetime, roomNo: room }); if (d.success) { showToast('guestMsg', d.message||'Guest checked in', true); appData.guestCheckIn = { name:'', property, datetime:'', room:'' }; ['guestInName','guestInRoom','guestInDateTime'].forEach(id => { if(qs(id)) qs(id).value=''; }); await loadOpenCheckIns(); renderPage(); } else showToast('guestMsg','Check-in failed',false); } catch(e) { showToast('guestMsg','Network error',false); } btn.disabled = false; }
+async function doGuestCheckOut() { const name = qs('guestOutName')?.value, property = qs('guestOutProperty')?.value, datetime = qs('guestOutDateTime')?.value, amount = qs('guestOutAmount')?.value, notes = qs('guestOutNotes')?.value; if (!name||!property||!datetime||!amount) { showToast('guestMsg','Name, property, date/time and amount required',false); return; } const btn = qs('doGuestCheckOut'); btn.disabled = true; try { const d = await apiCall('guestCheckOut', { staffEmail: currentUser.email, guestName: name, property, checkoutDateTime: datetime, amountPaid: amount, notes }); if (d.success) { showToast('guestMsg', d.message||'Guest checked out', true); appData.guestCheckOut = { name:'', property, datetime:'', amount:'', notes:'' }; ['guestOutName','guestOutAmount','guestOutNotes','guestOutDateTime'].forEach(id => { if(qs(id)) qs(id).value=''; }); await loadOpenCheckIns(); renderPage(); } else showToast('guestMsg','Check-out failed',false); } catch(e) { showToast('guestMsg','Network error',false); } btn.disabled = false; }
+async function addHelper() { const name = qs('helperName')?.value, property = qs('helperProperty')?.value, date = qs('helperDate')?.value, notes = qs('helperNotes')?.value; if (!name||!property||!date) { showToast('helperMsg','All fields required',false); return; } const btn = qs('addHelper'); btn.disabled = true; try { const d = await apiCall('addHelper', { managerEmail: currentUser.email, helperName: name, property, workDate: date, notes }); if (d.success) { showToast('helperMsg','Helper logged',true); appData.helperName = ''; appData.helperNotes = ''; ['helperName','helperNotes'].forEach(id => { if(qs(id)) qs(id).value=''; }); await loadHelpers(); renderPage(); } else showToast('helperMsg','Failed to log helper',false); } catch(e) { showToast('helperMsg','Network error',false); } btn.disabled = false; }
+async function addLead() { const name = qs('leadName')?.value, property = qs('leadProperty')?.value, contact = qs('leadContact')?.value, calls = qs('leadCalls')?.value, status = qs('leadStatus')?.value, notes = qs('leadNotes')?.value; if (!name||!property) { showToast('leadMsg','Lead name and property required',false); return; } const btn = qs('addLead'); btn.disabled = true; try { const d = await apiCall('addLead', { staffEmail: currentUser.email, property, leadName: name, contact, callsMade: calls||0, status, notes }); if (d.success) { showToast('leadMsg','Lead added',true); if (d.whatsappLink) window.open(d.whatsappLink, '_blank'); appData.lead = { name:'', contact:'', callsMade:0, status:'New', notes:'', property: appData.lead.property }; ['leadName','leadContact','leadNotes'].forEach(id => { if(qs(id)) qs(id).value=''; }); if(qs('leadCalls')) qs('leadCalls').value='0'; if(qs('leadStatus')) qs('leadStatus').value='New'; if (currentUser.team==='Sales') await loadMyLeads(); else await loadAllLeads(); renderPage(); } else showToast('leadMsg','Failed to add lead',false); } catch(e) { showToast('leadMsg','Network error',false); } btn.disabled = false; }
+function shareAttendanceWhatsApp() { if (!currentUser.whatsapp) { alert('No WhatsApp number'); return; } const property = qs('attProperty')?.value || appData.selectedProperty; const action = qs('attAction')?.value || appData.attendanceAction; const datetime = qs('attDateTime')?.value || appData.attendanceDateTime; const notes = qs('attNotes')?.value || appData.attendanceNotes; let msg = `*Staff Hub – Attendance*\nName: ${currentUser.name}\nProperty: ${property}\n${action}: ${datetime}`; if (notes) msg += `\nNotes: ${notes}`; window.open(`https://wa.me/${currentUser.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank'); }
+function shareEODWhatsApp() { if (!currentUser.whatsapp) { alert('No WhatsApp number'); return; } const property = qs('eodProperty')?.value || appData.eodProperty; const date = qs('eodDate')?.value || appData.eodDate; const sales = qs('eodSales')?.value || appData.eodSales; const occupancy = qs('eodOccupancy')?.value || appData.eodOccupancy; const maintenance = qs('eodMaintenance')?.value || appData.eodMaintenance; const notes = qs('eodNotes')?.value || appData.eodNotes; let msg = `*Staff Hub – EOD Report*\nName: ${currentUser.name}\nProperty: ${property}\nDate: ${date}\nSales: Rs.${sales||0}\nOccupancy: ${occupancy||'—'}%`; if (maintenance) msg += `\nMaintenance: ${maintenance}`; if (notes) msg += `\nNotes: ${notes}`; window.open(`https://wa.me/${currentUser.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank'); }
+function shareLeadWhatsApp() { if (!currentUser.whatsapp) { alert('No WhatsApp number'); return; } const name = qs('leadName')?.value || appData.lead.name; const property = qs('leadProperty')?.value || appData.lead.property; const calls = qs('leadCalls')?.value || appData.lead.callsMade; const status = qs('leadStatus')?.value || appData.lead.status; const notes = qs('leadNotes')?.value || appData.lead.notes; let msg = `*Staff Hub – Sales Lead*\nStaff: ${currentUser.name}\nLead: ${name}\nProperty: ${property}\nCalls made: ${calls}\nStatus: ${status}`; if (notes) msg += `\nNotes: ${notes}`; window.open(`https://wa.me/${currentUser.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank'); }
+function setSidebarState(mini) { sidebarMini = mini; const sb = qs('sidebar'); const main = qs('mainArea'); const icon = qs('toggleIcon'); sb.classList.toggle('mini', mini); main.classList.toggle('mini', mini); if (icon) { icon.setAttribute('data-lucide', mini ? 'chevrons-right' : 'chevrons-left'); lucide.createIcons({ nodes: [icon.parentElement] }); } localStorage.setItem('sidebarMini', mini ? '1' : '0'); }
 
-function renderEOD() {
-  return `
-  <div class="card">
-    <div class="card-hd">
-      <div class="card-hd-icon"><i data-lucide="clipboard-list" style="width:18px;height:18px;"></i></div>
-      <h3>Daily Report</h3>
-    </div>
-    <div class="grid-2">
-      <div>
-        <label>Property</label>
-        <select id="eodProperty">${propOptions(appData.eodProperty)}</select>
-        <label>Report Date</label>
-        <input type="date" id="eodDate" value="${appData.eodDate}">
-        <label>Sales Amount (₹)</label>
-        <input type="number" id="eodSales" value="${appData.eodSales}" placeholder="0">
-        <label>Occupancy (%)</label>
-        <input type="text" id="eodOccupancy" value="${appData.eodOccupancy}" placeholder="e.g. 85">
-      </div>
-      <div>
-        <label>Maintenance Tasks Completed</label>
-        <textarea id="eodMaintenance" rows="3" placeholder="Describe completed maintenance…">${appData.eodMaintenance}</textarea>
-        <label>Additional Notes</label>
-        <textarea id="eodNotes" rows="3" placeholder="Any other notes…">${appData.eodNotes}</textarea>
-      </div>
-    </div>
-    <div class="action-row">
-      <button class="btn btn-primary" id="submitEOD">
-        <i data-lucide="send" style="width:16px;height:16px;"></i> Submit Report
-      </button>
-      <button class="btn btn-whatsapp" id="shareEOD">
-        <i data-lucide="message-circle" style="width:16px;height:16px;"></i> WhatsApp
-      </button>
-    </div>
-    <div id="eodMsg" class="toast"></div>
-  </div>`;
-}
-
-function renderGuests() {
-  return `
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-hd">
-        <div class="card-hd-icon"><i data-lucide="log-in" style="width:18px;height:18px;"></i></div>
-        <h3>Check In</h3>
-      </div>
-      <label>Guest Name</label>
-      <input type="text" id="guestInName" placeholder="Full name" value="${appData.guestCheckIn.name}">
-      <label>Property</label>
-      <select id="guestInProperty">${propOptions(appData.guestCheckIn.property)}</select>
-      <label>Check-in Date & Time</label>
-      <input type="datetime-local" id="guestInDateTime" value="${appData.guestCheckIn.datetime}">
-      <label>Room / Unit</label>
-      <input type="text" id="guestInRoom" placeholder="e.g. 101" value="${appData.guestCheckIn.room}">
-      <button class="btn btn-primary" id="doGuestCheckIn" style="margin-top:1rem;width:100%">
-        <i data-lucide="log-in" style="width:16px;height:16px;"></i> Check In Guest
-      </button>
-    </div>
-    <div class="card">
-      <div class="card-hd">
-        <div class="card-hd-icon"><i data-lucide="log-out" style="width:18px;height:18px;"></i></div>
-        <h3>Check Out</h3>
-      </div>
-      <label>Guest Name</label>
-      <input type="text" id="guestOutName" placeholder="Start typing…" value="${appData.guestCheckOut.name}" list="openGuestsList">
-      <datalist id="openGuestsList">${appData.openCheckIns.map(g=>`<option value="${g.GuestName}"></option>`).join('')}</datalist>
-      <label>Property</label>
-      <select id="guestOutProperty">${propOptions(appData.guestCheckOut.property)}</select>
-      <label>Check-out Date & Time</label>
-      <input type="datetime-local" id="guestOutDateTime" value="${appData.guestCheckOut.datetime}">
-      <label>Amount Paid (₹)</label>
-      <input type="number" id="guestOutAmount" value="${appData.guestCheckOut.amount}" placeholder="0">
-      <label>Notes</label>
-      <textarea id="guestOutNotes" rows="2" placeholder="Payment method, remarks…">${appData.guestCheckOut.notes}</textarea>
-      <button class="btn btn-primary" id="doGuestCheckOut" style="margin-top:1rem;width:100%">
-        <i data-lucide="log-out" style="width:16px;height:16px;"></i> Check Out & Record
-      </button>
-    </div>
-  </div>
-  <div id="guestMsg" class="toast"></div>`;
-}
-
-function renderHelpers() {
-  const rows = appData.recentHelpers.slice(0,8);
-  return `
-  <div class="card" style="max-width:640px;margin-bottom:1.25rem">
-    <div class="card-hd">
-      <div class="card-hd-icon"><i data-lucide="hard-hat" style="width:18px;height:18px;"></i></div>
-      <h3>Log a Helper</h3>
-    </div>
-    <div class="grid-2">
-      <div>
-        <label>Helper Name</label>
-        <input type="text" id="helperName" value="${appData.helperName}" placeholder="e.g. Raju">
-        <label>Property</label>
-        <select id="helperProperty">${propOptions(appData.helperProperty)}</select>
-      </div>
-      <div>
-        <label>Work Date</label>
-        <input type="date" id="helperDate" value="${appData.helperDate}">
-        <label>Notes</label>
-        <textarea id="helperNotes" rows="2" placeholder="What they helped with…">${appData.helperNotes}</textarea>
-      </div>
-    </div>
-    <button class="btn btn-primary" id="addHelper" style="margin-top:1rem;width:100%">
-      <i data-lucide="plus" style="width:16px;height:16px;"></i> Log Helper
-    </button>
-    <div id="helperMsg" class="toast"></div>
-  </div>
-  <div class="card" style="max-width:640px">
-    <div class="card-hd">
-      <div class="card-hd-icon"><i data-lucide="list" style="width:18px;height:18px;"></i></div>
-      <h3>Recent Helpers</h3>
-    </div>
-    <div class="table-wrap">
-      ${rows.length ? `<table><thead><tr><th>Date</th><th>Name</th><th>Property</th><th>Notes</th></tr></thead><tbody>${rows.map(h=>`<tr><td>${h.WorkDate}</td><td>${h.HelperName}</td><td>${h.Property}</td><td>${h.Notes||'—'}</td></tr>`).join('')}</tbody></table>` : `<div class="empty"><div class="empty-icon"><i data-lucide="users" style="width:20px;height:20px;"></i></div><p>No helpers logged yet</p></div>`}
-    </div>
-  </div>`;
-}
-
-function renderLeads() {
-  const leads = currentUser.team === 'Sales' ? appData.myLeads : appData.allLeads;
-  return `
-  <div class="card" style="max-width:640px;margin-bottom:1.25rem">
-    <div class="card-hd">
-      <div class="card-hd-icon"><i data-lucide="plus-circle" style="width:18px;height:18px;"></i></div>
-      <h3>Add Lead</h3>
-    </div>
-    <div class="grid-2">
-      <div>
-        <label>Lead Name *</label>
-        <input type="text" id="leadName" value="${appData.lead.name}" placeholder="Full name">
-        <label>Property *</label>
-        <select id="leadProperty">${propOptions(appData.lead.property)}</select>
-        <label>Contact</label>
-        <input type="text" id="leadContact" value="${appData.lead.contact}" placeholder="Phone or email">
-      </div>
-      <div>
-        <label>Calls Made</label>
-        <input type="number" id="leadCalls" value="${appData.lead.callsMade}" min="0">
-        <label>Status</label>
-        <select id="leadStatus">
-          ${['New','Contacted','Negotiation','Won','Lost'].map(s=>`<option ${appData.lead.status===s?'selected':''}>${s}</option>`).join('')}
-        </select>
-        <label>Notes</label>
-        <textarea id="leadNotes" rows="2" placeholder="Interests, follow-up…">${appData.lead.notes}</textarea>
-      </div>
-    </div>
-    <div class="action-row">
-      <button class="btn btn-primary" id="addLead">
-        <i data-lucide="plus" style="width:16px;height:16px;"></i> Add Lead
-      </button>
-      <button class="btn btn-whatsapp" id="shareLead">
-        <i data-lucide="message-circle" style="width:16px;height:16px;"></i> WhatsApp
-      </button>
-    </div>
-    <div id="leadMsg" class="toast"></div>
-  </div>
-  <div class="card" style="max-width:900px">
-    <div class="card-hd">
-      <div class="card-hd-icon"><i data-lucide="bar-chart-2" style="width:18px;height:18px;"></i></div>
-      <h3>${currentUser.team==='Sales'?'My Recent Leads':'All Sales Leads'}</h3>
-    </div>
-    <div class="table-wrap">
-      ${leads.length ? `<table><thead><tr>${currentUser.team!=='Sales'?'<th>Staff</th>':''}<th>Date</th><th>Lead</th><th>Property</th><th>Calls</th><th>Status</th><th>Notes</th></tr></thead><tbody>${leads.slice(0,15).map(l=>`<tr>${currentUser.team!=='Sales'?`<td>${l.StaffEmail?.split('@')[0]||'—'}</td>`:''}<td>${l.Timestamp?.slice(0,10)||'—'}</td><td>${l.LeadName}</td><td>${l.Property}</td><td>${l.CallsMade}</td><td><span class="status-pill status-${l.Status}">${l.Status}</span></td><td>${l.Notes||'—'}</td></tr>`).join('')}</tbody></table>` : `<div class="empty"><div class="empty-icon"><i data-lucide="phone-call" style="width:20px;height:20px;"></i></div><p>No leads found</p></div>`}
-    </div>
-  </div>`;
-}
-
-function renderProfile() {
-  const initials = currentUser.name ? currentUser.name[0].toUpperCase() : '?';
-  return `
-  <div class="card" style="max-width:480px">
-    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem">
-      <div class="profile-avatar-lg">${initials}</div>
-      <div>
-        <div style="font-size:1.1rem;font-weight:700;color:var(--s900);letter-spacing:-0.02em">${currentUser.name}</div>
-        <div style="font-size:0.82rem;color:var(--s500);margin-top:0.2rem">${currentUser.team} · ${currentUser.role}</div>
-      </div>
-    </div>
-    <div class="divider"></div>
-    <div class="info-row">
-      <span class="ir-icon"><i data-lucide="phone" style="width:16px;height:16px;"></i></span>
-      <div><div class="ir-label">Phone</div><div class="ir-value">${currentUser.phone||'—'}</div></div>
-    </div>
-    <div class="info-row">
-      <span class="ir-icon"><i data-lucide="users-2" style="width:16px;height:16px;"></i></span>
-      <div><div class="ir-label">Team</div><div class="ir-value">${currentUser.team}</div></div>
-    </div>
-    <div class="info-row">
-      <span class="ir-icon"><i data-lucide="badge-check" style="width:16px;height:16px;"></i></span>
-      <div><div class="ir-label">Role</div><div class="ir-value">${currentUser.role}</div></div>
-    </div>
-    <div class="divider"></div>
-    <div style="font-size:0.72rem;font-weight:600;color:var(--s500);text-transform:uppercase;letter-spacing:0.055em;margin-bottom:0.65rem">Assigned Properties</div>
-    <div>${currentUser.assignedProperties.map(p=>`<span class="prop-badge"><i data-lucide="building" style="width:12px;height:12px;"></i> ${p}</span>`).join('')}</div>
-  </div>`;
-}
-
-// ── EVENTS ─────────────────────────────────────────────────────
-function attachPageEvents() {
-  if (currentPage === 'attendance') {
-    qs('submitAttendance')?.addEventListener('click', submitAttendance);
-    qs('shareAttendance')?.addEventListener('click', shareAttendanceWhatsApp);
-    qs('attProperty')?.addEventListener('change', e => appData.selectedProperty = e.target.value);
-    qs('attAction')?.addEventListener('change', e => appData.attendanceAction = e.target.value);
-    qs('attDateTime')?.addEventListener('change', e => appData.attendanceDateTime = e.target.value);
-    qs('attNotes')?.addEventListener('input', e => appData.attendanceNotes = e.target.value);
-  } else if (currentPage === 'eod') {
-    qs('submitEOD')?.addEventListener('click', submitEOD);
-    qs('shareEOD')?.addEventListener('click', shareEODWhatsApp);
-    qs('eodProperty')?.addEventListener('change', e => appData.eodProperty = e.target.value);
-    qs('eodDate')?.addEventListener('change', e => appData.eodDate = e.target.value);
-    qs('eodSales')?.addEventListener('input', e => appData.eodSales = e.target.value);
-    qs('eodOccupancy')?.addEventListener('input', e => appData.eodOccupancy = e.target.value);
-    qs('eodMaintenance')?.addEventListener('input', e => appData.eodMaintenance = e.target.value);
-    qs('eodNotes')?.addEventListener('input', e => appData.eodNotes = e.target.value);
-  } else if (currentPage === 'guests') {
-    qs('doGuestCheckIn')?.addEventListener('click', doGuestCheckIn);
-    qs('doGuestCheckOut')?.addEventListener('click', doGuestCheckOut);
-    qs('guestInName')?.addEventListener('input', e => appData.guestCheckIn.name = e.target.value);
-    qs('guestInProperty')?.addEventListener('change', e => appData.guestCheckIn.property = e.target.value);
-    qs('guestInDateTime')?.addEventListener('change', e => appData.guestCheckIn.datetime = e.target.value);
-    qs('guestInRoom')?.addEventListener('input', e => appData.guestCheckIn.room = e.target.value);
-    qs('guestOutName')?.addEventListener('input', e => appData.guestCheckOut.name = e.target.value);
-    qs('guestOutProperty')?.addEventListener('change', e => appData.guestCheckOut.property = e.target.value);
-    qs('guestOutDateTime')?.addEventListener('change', e => appData.guestCheckOut.datetime = e.target.value);
-    qs('guestOutAmount')?.addEventListener('input', e => appData.guestCheckOut.amount = e.target.value);
-    qs('guestOutNotes')?.addEventListener('input', e => appData.guestCheckOut.notes = e.target.value);
-  } else if (currentPage === 'helpers') {
-    qs('addHelper')?.addEventListener('click', addHelper);
-    qs('helperName')?.addEventListener('input', e => appData.helperName = e.target.value);
-    qs('helperProperty')?.addEventListener('change', e => appData.helperProperty = e.target.value);
-    qs('helperDate')?.addEventListener('change', e => appData.helperDate = e.target.value);
-    qs('helperNotes')?.addEventListener('input', e => appData.helperNotes = e.target.value);
-  } else if (currentPage === 'leads') {
-    qs('addLead')?.addEventListener('click', addLead);
-    qs('shareLead')?.addEventListener('click', shareLeadWhatsApp);
-    qs('leadName')?.addEventListener('input', e => appData.lead.name = e.target.value);
-    qs('leadProperty')?.addEventListener('change', e => appData.lead.property = e.target.value);
-    qs('leadContact')?.addEventListener('input', e => appData.lead.contact = e.target.value);
-    qs('leadCalls')?.addEventListener('input', e => appData.lead.callsMade = parseInt(e.target.value)||0);
-    qs('leadStatus')?.addEventListener('change', e => appData.lead.status = e.target.value);
-    qs('leadNotes')?.addEventListener('input', e => appData.lead.notes = e.target.value);
-  }
-}
-
-// ── RENDER ─────────────────────────────────────────────────────
-function renderPage() {
-  const pc = qs('pageContent');
-  const renders = { attendance: renderAttendance, eod: renderEOD, guests: renderGuests, helpers: renderHelpers, leads: renderLeads, profile: renderProfile };
-  pc.innerHTML = `<div class="page-section"><div class="page-hd"><h2>${PAGE_META[currentPage].title}</h2><p>${PAGE_META[currentPage].subtitle}</p></div>${(renders[currentPage]||(() => '<div class="card">Page not found</div>'))()}</div>`;
-  lucide.createIcons({ nodes: [pc] });
-  attachPageEvents();
-}
-
-function navigateTo(page) {
-  currentPage = page;
-  // Update nav active state
-  document.querySelectorAll('.nav-item').forEach(el => {
-    el.classList.toggle('active', el.dataset.page === page);
-  });
-  qs('topbarTitle').textContent = PAGE_META[page].title;
-  // Close mobile sidebar
-  qs('sidebar').classList.remove('mobile-open');
-  qs('sidebarOverlay').classList.remove('show');
-  renderPage();
-}
-
-// ── API ACTIONS ────────────────────────────────────────────────
-async function submitAttendance() {
-  const property = qs('attProperty')?.value || appData.selectedProperty;
-  const action   = qs('attAction')?.value || appData.attendanceAction;
-  const datetime = qs('attDateTime')?.value || appData.attendanceDateTime;
-  const notes    = qs('attNotes')?.value || appData.attendanceNotes;
-  if (!property || !datetime) { showToast('attMsg','Property and date/time required',false); return; }
-  const btn = qs('submitAttendance'); btn.disabled = true;
-  try {
-    const d = await apiCall('checkInOut', { email: currentUser.email, property, action, datetime, notes });
-    if (d.success) {
-      showToast('attMsg', `${action} recorded successfully`, true);
-      if (d.whatsappLink) window.open(d.whatsappLink, '_blank');
-      Object.assign(appData, { selectedProperty: property, attendanceAction: action, attendanceDateTime: datetime, attendanceNotes: notes });
-    } else showToast('attMsg', 'Failed to record attendance', false);
-  } catch(e) { showToast('attMsg','Network error',false); }
-  btn.disabled = false;
-}
-
-async function submitEOD() {
-  const property    = qs('eodProperty')?.value || appData.eodProperty;
-  const date        = qs('eodDate')?.value || appData.eodDate;
-  const sales       = qs('eodSales')?.value || appData.eodSales;
-  const occupancy   = qs('eodOccupancy')?.value || appData.eodOccupancy;
-  const maintenance = qs('eodMaintenance')?.value || appData.eodMaintenance;
-  const notes       = qs('eodNotes')?.value || appData.eodNotes;
-  if (!property || !date) { showToast('eodMsg','Property and date required',false); return; }
-  const btn = qs('submitEOD'); btn.disabled = true;
-  try {
-    const d = await apiCall('submitEOD', { email: currentUser.email, property, date, sales: sales||0, occupancy, notes, maintenance });
-    if (d.success) {
-      showToast('eodMsg','EOD report submitted',true);
-      if (d.whatsappLink) window.open(d.whatsappLink, '_blank');
-      Object.assign(appData, { eodSales:'', eodOccupancy:'', eodMaintenance:'', eodNotes:'' });
-      ['eodSales','eodOccupancy','eodMaintenance','eodNotes'].forEach(id => { if(qs(id)) qs(id).value = ''; });
-    } else showToast('eodMsg','Failed to submit report',false);
-  } catch(e) { showToast('eodMsg','Network error',false); }
-  btn.disabled = false;
-}
-
-async function doGuestCheckIn() {
-  const name     = qs('guestInName')?.value;
-  const property = qs('guestInProperty')?.value;
-  const datetime = qs('guestInDateTime')?.value;
-  const room     = qs('guestInRoom')?.value;
-  if (!name||!property||!datetime) { showToast('guestMsg','Name, property and date/time required',false); return; }
-  const btn = qs('doGuestCheckIn'); btn.disabled = true;
-  try {
-    const d = await apiCall('guestCheckIn', { staffEmail: currentUser.email, guestName: name, property, checkinDateTime: datetime, roomNo: room });
-    if (d.success) {
-      showToast('guestMsg', d.message||'Guest checked in', true);
-      appData.guestCheckIn = { name:'', property, datetime:'', room:'' };
-      ['guestInName','guestInRoom','guestInDateTime'].forEach(id => { if(qs(id)) qs(id).value=''; });
-      await loadOpenCheckIns(); renderPage();
-    } else showToast('guestMsg','Check-in failed',false);
-  } catch(e) { showToast('guestMsg','Network error',false); }
-  btn.disabled = false;
-}
-
-async function doGuestCheckOut() {
-  const name     = qs('guestOutName')?.value;
-  const property = qs('guestOutProperty')?.value;
-  const datetime = qs('guestOutDateTime')?.value;
-  const amount   = qs('guestOutAmount')?.value;
-  const notes    = qs('guestOutNotes')?.value;
-  if (!name||!property||!datetime||!amount) { showToast('guestMsg','Name, property, date/time and amount required',false); return; }
-  const btn = qs('doGuestCheckOut'); btn.disabled = true;
-  try {
-    const d = await apiCall('guestCheckOut', { staffEmail: currentUser.email, guestName: name, property, checkoutDateTime: datetime, amountPaid: amount, notes });
-    if (d.success) {
-      showToast('guestMsg', d.message||'Guest checked out', true);
-      appData.guestCheckOut = { name:'', property, datetime:'', amount:'', notes:'' };
-      ['guestOutName','guestOutAmount','guestOutNotes','guestOutDateTime'].forEach(id => { if(qs(id)) qs(id).value=''; });
-      await loadOpenCheckIns(); renderPage();
-    } else showToast('guestMsg','Check-out failed',false);
-  } catch(e) { showToast('guestMsg','Network error',false); }
-  btn.disabled = false;
-}
-
-async function addHelper() {
-  const name     = qs('helperName')?.value;
-  const property = qs('helperProperty')?.value;
-  const date     = qs('helperDate')?.value;
-  const notes    = qs('helperNotes')?.value;
-  if (!name||!property||!date) { showToast('helperMsg','All fields required',false); return; }
-  const btn = qs('addHelper'); btn.disabled = true;
-  try {
-    const d = await apiCall('addHelper', { managerEmail: currentUser.email, helperName: name, property, workDate: date, notes });
-    if (d.success) {
-      showToast('helperMsg','Helper logged',true);
-      appData.helperName = ''; appData.helperNotes = '';
-      ['helperName','helperNotes'].forEach(id => { if(qs(id)) qs(id).value=''; });
-      await loadHelpers(); renderPage();
-    } else showToast('helperMsg','Failed to log helper',false);
-  } catch(e) { showToast('helperMsg','Network error',false); }
-  btn.disabled = false;
-}
-
-async function addLead() {
-  const name     = qs('leadName')?.value;
-  const property = qs('leadProperty')?.value;
-  const contact  = qs('leadContact')?.value;
-  const calls    = qs('leadCalls')?.value;
-  const status   = qs('leadStatus')?.value;
-  const notes    = qs('leadNotes')?.value;
-  if (!name||!property) { showToast('leadMsg','Lead name and property required',false); return; }
-  const btn = qs('addLead'); btn.disabled = true;
-  try {
-    const d = await apiCall('addLead', { staffEmail: currentUser.email, property, leadName: name, contact, callsMade: calls||0, status, notes });
-    if (d.success) {
-      showToast('leadMsg','Lead added',true);
-      if (d.whatsappLink) window.open(d.whatsappLink, '_blank');
-      appData.lead = { name:'', contact:'', callsMade:0, status:'New', notes:'', property: appData.lead.property };
-      ['leadName','leadContact','leadNotes'].forEach(id => { if(qs(id)) qs(id).value=''; });
-      if(qs('leadCalls')) qs('leadCalls').value='0';
-      if(qs('leadStatus')) qs('leadStatus').value='New';
-      if (currentUser.team==='Sales') await loadMyLeads(); else await loadAllLeads();
-      renderPage();
-    } else showToast('leadMsg','Failed to add lead',false);
-  } catch(e) { showToast('leadMsg','Network error',false); }
-  btn.disabled = false;
-}
-
-// ── WHATSAPP SHARING ───────────────────────────────────────────
-function shareAttendanceWhatsApp() {
-  if (!currentUser.whatsapp) { alert('No WhatsApp number for this user'); return; }
-  const property = qs('attProperty')?.value || appData.selectedProperty;
-  const action   = qs('attAction')?.value || appData.attendanceAction;
-  const datetime = qs('attDateTime')?.value || appData.attendanceDateTime;
-  const notes    = qs('attNotes')?.value || appData.attendanceNotes;
-  let msg = `*Staff Hub – Attendance*\nName: ${currentUser.name}\nProperty: ${property}\n${action}: ${datetime}`;
-  if (notes) msg += `\nNotes: ${notes}`;
-  window.open(`https://wa.me/${currentUser.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank');
-}
-
-function shareEODWhatsApp() {
-  if (!currentUser.whatsapp) { alert('No WhatsApp number'); return; }
-  const property    = qs('eodProperty')?.value || appData.eodProperty;
-  const date        = qs('eodDate')?.value || appData.eodDate;
-  const sales       = qs('eodSales')?.value || appData.eodSales;
-  const occupancy   = qs('eodOccupancy')?.value || appData.eodOccupancy;
-  const maintenance = qs('eodMaintenance')?.value || appData.eodMaintenance;
-  const notes       = qs('eodNotes')?.value || appData.eodNotes;
-  let msg = `*Staff Hub – EOD Report*\nName: ${currentUser.name}\nProperty: ${property}\nDate: ${date}\nSales: Rs.${sales||0}\nOccupancy: ${occupancy||'—'}%`;
-  if (maintenance) msg += `\nMaintenance: ${maintenance}`;
-  if (notes) msg += `\nNotes: ${notes}`;
-  window.open(`https://wa.me/${currentUser.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank');
-}
-
-function shareLeadWhatsApp() {
-  if (!currentUser.whatsapp) { alert('No WhatsApp number'); return; }
-  const name     = qs('leadName')?.value || appData.lead.name;
-  const property = qs('leadProperty')?.value || appData.lead.property;
-  const calls    = qs('leadCalls')?.value || appData.lead.callsMade;
-  const status   = qs('leadStatus')?.value || appData.lead.status;
-  const notes    = qs('leadNotes')?.value || appData.lead.notes;
-  let msg = `*Staff Hub – Sales Lead*\nStaff: ${currentUser.name}\nLead: ${name}\nProperty: ${property}\nCalls made: ${calls}\nStatus: ${status}`;
-  if (notes) msg += `\nNotes: ${notes}`;
-  window.open(`https://wa.me/${currentUser.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank');
-}
-
-// ── SIDEBAR TOGGLE ─────────────────────────────────────────────
-function setSidebarState(mini) {
-  sidebarMini = mini;
-  const sb = qs('sidebar');
-  const main = qs('mainArea');
-  const icon = qs('toggleIcon');
-  sb.classList.toggle('mini', mini);
-  main.classList.toggle('mini', mini);
-  if (icon) {
-    icon.setAttribute('data-lucide', mini ? 'chevrons-right' : 'chevrons-left');
-    lucide.createIcons({ nodes: [icon.parentElement] });
-  }
-  localStorage.setItem('sidebarMini', mini ? '1' : '0');
-}
-
-// ── INIT ───────────────────────────────────────────────────────
-function initApp(user) {
-  currentUser = user;
-  qs('loginSection').style.display = 'none';
-  qs('appSection').style.display = 'block';
-
-  // Populate sidebar user info
-  qs('sbAvatar').textContent = user.name ? user.name[0].toUpperCase() : '?';
-  qs('sbName').textContent = user.name || '—';
-  qs('sbRole').textContent = `${user.team} · ${user.role}`;
-  qs('teamLabel').textContent = user.team || '—';
-
-  // Defaults
-  if (user.assignedProperties.length) {
-    const p = user.assignedProperties[0];
-    appData.selectedProperty = p;
-    appData.eodProperty = p;
-    appData.helperProperty = p;
-    appData.guestCheckIn.property = p;
-    appData.guestCheckOut.property = p;
-    appData.lead.property = p;
-  }
-
-  // Restore sidebar state
-  const savedMini = localStorage.getItem('sidebarMini');
-  setSidebarState(savedMini !== '0');
-
-  // Wire nav items
-  document.querySelectorAll('.nav-item[data-page]').forEach(item => {
-    item.addEventListener('click', () => navigateTo(item.dataset.page));
-  });
-
-  // Sidebar toggle
+function initApp(user) { currentUser = user; qs('loginSection').style.display = 'none'; qs('appSection').style.display = 'block'; qs('sbAvatar').textContent = user.name ? user.name[0].toUpperCase() : '?'; qs('sbName').textContent = user.name || '—'; qs('sbRole').textContent = `${user.team} · ${user.role}`; qs('teamLabel').textContent = user.team || '—'; if (user.assignedProperties.length) { const p = user.assignedProperties[0]; appData.selectedProperty = p; appData.eodProperty = p; appData.helperProperty = p; appData.guestCheckIn.property = p; appData.guestCheckOut.property = p; appData.lead.property = p; } 
+  // ✅ Only Owner sees Admin Panel (not Management)
+  const isAdmin = user.team === 'Owner';
+  const adminSection = qs('adminSection');
+  if(adminSection) adminSection.style.display = isAdmin ? 'block' : 'none';
+  setSidebarState(localStorage.getItem('sidebarMini') !== '0');
+  document.querySelectorAll('.nav-item[data-page]').forEach(item => { item.addEventListener('click', () => navigateTo(item.dataset.page)); });
   qs('sidebarToggle')?.addEventListener('click', () => setSidebarState(!sidebarMini));
-
-  // Mobile menu
-  qs('mobileMenuBtn')?.addEventListener('click', () => {
-    qs('sidebar').classList.toggle('mobile-open');
-    qs('sidebarOverlay').classList.toggle('show');
-  });
-  qs('sidebarOverlay')?.addEventListener('click', () => {
-    qs('sidebar').classList.remove('mobile-open');
-    qs('sidebarOverlay').classList.remove('show');
-  });
-
-  // Logout
-  qs('logoutBtn')?.addEventListener('click', () => {
-    localStorage.removeItem('staffHubUser');
-    currentUser = null;
-    qs('appSection').style.display = 'none';
-    qs('loginSection').style.display = 'flex';
-    qs('loginEmail').value = '';
-    qs('loginPassword').value = '';
-    currentPage = 'attendance';
-  });
-
-  // Load data & render
-  loadHelpers();
-  loadOpenCheckIns();
-  if (user.team === 'Sales') loadMyLeads(); else loadAllLeads();
-  navigateTo('attendance');
-  lucide.createIcons();
-}
-
-// ── LOGIN ──────────────────────────────────────────────────────
-qs('loginBtn').addEventListener('click', async () => {
-  const email = qs('loginEmail').value.trim();
-  const pwd   = qs('loginPassword').value;
-  const errEl = qs('loginError');
-  errEl.style.display = 'none';
-  if (!email || !pwd) { errEl.textContent = 'Email and password are required'; errEl.style.display = 'block'; return; }
-  const btn = qs('loginBtn');
-  btn.textContent = 'Signing in…'; btn.disabled = true;
-  try {
-    const d = await apiCall('login', { email, password: pwd });
-    if (d.success) {
-      d.email = email;
-      localStorage.setItem('staffHubUser', JSON.stringify(d));
-      initApp(d);
-    } else {
-      errEl.textContent = d.error || 'Login failed. Check your credentials.';
-      errEl.style.display = 'block';
-    }
-  } catch(e) {
-    errEl.textContent = 'Network error. Please check your connection.';
-    errEl.style.display = 'block';
-  }
-  btn.textContent = 'Sign in'; btn.disabled = false;
-});
-
-['loginEmail','loginPassword'].forEach(id => {
-  qs(id)?.addEventListener('keydown', e => { if (e.key === 'Enter') qs('loginBtn').click(); });
-});
-
-// ── AUTO LOGIN ─────────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded', () => {
-  lucide.createIcons();
-  const saved = localStorage.getItem('staffHubUser');
-  if (saved) {
-    try {
-      const user = JSON.parse(saved);
-      initApp(user);
-    } catch(e) { console.warn('Session restore failed', e); }
-  }
-});
+  qs('mobileMenuBtn')?.addEventListener('click', () => { qs('sidebar').classList.toggle('mobile-open'); qs('sidebarOverlay').classList.toggle('show'); });
+  qs('sidebarOverlay')?.addEventListener('click', () => { qs('sidebar').classList.remove('mobile-open'); qs('sidebarOverlay').classList.remove('show'); });
+  qs('logoutBtn')?.addEventListener('click', () => { localStorage.removeItem('staffHubUser'); currentUser = null; qs('appSection').style.display = 'none'; qs('loginSection').style.display = 'flex'; qs('loginEmail').value = ''; qs('loginPassword').value = ''; currentPage = 'attendance'; });
+  loadHelpers(); loadOpenCheckIns(); if (user.team === 'Sales') loadMyLeads(); else loadAllLeads(); navigateTo('attendance'); lucide.createIcons(); }
+qs('loginBtn').addEventListener('click', async () => { const email = qs('loginEmail').value.trim(); const pwd = qs('loginPassword').value; const errEl = qs('loginError'); errEl.style.display = 'none'; if (!email || !pwd) { errEl.textContent = 'Email and password are required'; errEl.style.display = 'block'; return; } const btn = qs('loginBtn'); btn.textContent = 'Signing in…'; btn.disabled = true; try { const d = await apiCall('login', { email, password: pwd }); if (d.success) { d.email = email; localStorage.setItem('staffHubUser', JSON.stringify(d)); initApp(d); } else { errEl.textContent = d.error || 'Login failed. Check your credentials.'; errEl.style.display = 'block'; } } catch(e) { errEl.textContent = 'Network error. Please check your connection.'; errEl.style.display = 'block'; } btn.textContent = 'Sign in'; btn.disabled = false; });
+['loginEmail','loginPassword'].forEach(id => { qs(id)?.addEventListener('keydown', e => { if (e.key === 'Enter') qs('loginBtn').click(); }); });
+window.addEventListener('DOMContentLoaded', () => { lucide.createIcons(); const saved = localStorage.getItem('staffHubUser'); if (saved) { try { const user = JSON.parse(saved); initApp(user); } catch(e) { console.warn('Session restore failed', e); } } });
 </script>
 </body>
 </html>
